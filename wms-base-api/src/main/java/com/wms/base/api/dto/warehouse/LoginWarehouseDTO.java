@@ -1,11 +1,12 @@
-package com.wms.base.service.model.entity.warehouse;
+package com.wms.base.api.dto.warehouse;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
     * 仓库表
     */
-public class WarehouseEntity {
+public class LoginWarehouseDTO implements Serializable {
     private Long id;
 
     /**

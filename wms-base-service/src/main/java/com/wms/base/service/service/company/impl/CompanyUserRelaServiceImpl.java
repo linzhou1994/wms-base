@@ -9,12 +9,14 @@ import com.wms.base.service.model.enums.company.CompanyStatusEnum;
 import com.wms.base.service.model.enums.error.WmsBaseErrorCodeEnum;
 import com.wms.base.service.model.entity.company.CompanyEntity;
 import com.wms.base.service.model.entity.company.CompanyUserRelaEntity;
+import com.wms.base.service.model.enums.rela.RelaStatusEnum;
 import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.service.service.company.CompanyUserRelaService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * CopyRight : <company domain>
@@ -53,8 +55,22 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
             entity.setCompanyId(companyId);
             entity.setUserId(userId);
             entity.setCreateId(loginUserId);
+            entity.setStatus(RelaStatusEnum.ALLOW_LOGIN.getCode());
             needBandRelaList.add(entity);
         }
         companyUserRelaMapper.batchInsert(needBandRelaList);
+    }
+
+    @Override
+    public List<Long> getBandCompanyId() throws BizException {
+        Long userId = LoginUtil.getUserId();
+
+       List<CompanyUserRelaEntity> entities = companyUserRelaMapper.selectByUserId(userId,RelaStatusEnum.ALLOW_LOGIN.getCode());
+
+
+        return entities.stream()
+                .map(CompanyUserRelaEntity::getCompanyId)
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

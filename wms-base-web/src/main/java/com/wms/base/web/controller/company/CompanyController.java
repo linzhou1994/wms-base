@@ -3,9 +3,8 @@ package com.wms.base.web.controller.company;
 import com.java.utils.exception.BizException;
 import com.java.utils.result.Result;
 import com.spring.utils.bean.BeanCopy;
-import com.wms.base.api.annotation.NotLoginCompany;
-import com.wms.base.service.model.param.company.CreateCompanyParam;
 import com.wms.base.service.model.entity.company.CompanyEntity;
+import com.wms.base.service.model.param.company.CreateCompanyParam;
 import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.web.request.IdRequest;
 import com.wms.base.web.request.company.CreateCompanyRequest;
@@ -40,7 +39,6 @@ public class CompanyController {
      * @return
      * @throws BizException
      */
-    @NotLoginCompany
     @RequestMapping("createCompany")
     public Result<Long> createCompany(@RequestBody CreateCompanyRequest createCompanyParam) throws BizException {
 
@@ -57,7 +55,6 @@ public class CompanyController {
      * @throws BizException
      */
     @RequestMapping("freezeCompany")
-    @NotLoginCompany
     public Result freezeCompany(@RequestBody IdRequest idRequest) throws BizException {
 
         companyService.freezeCompany(idRequest.getId());
@@ -70,7 +67,6 @@ public class CompanyController {
      * @param idRequest 要登录的企业id
      * @return
      */
-    @NotLoginCompany
     @RequestMapping("chooseCompany")
     public Result chooseCompany(@RequestBody IdRequest idRequest) throws BizException {
         companyService.chooseCompany(idRequest.getId());

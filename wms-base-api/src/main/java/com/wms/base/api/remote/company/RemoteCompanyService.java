@@ -1,7 +1,7 @@
 package com.wms.base.api.remote.company;
 
 import com.java.utils.exception.BizException;
-import com.wms.base.api.dto.company.CompanyDTO;
+import com.wms.base.api.dto.company.LoginCompanyDTO;
 
 /**
  * @author linzhou
@@ -14,5 +14,5 @@ public interface RemoteCompanyService {
      * @return
      * @throws BizException
      */
-    CompanyDTO getLoginCompany() throws BizException;
+    LoginCompanyDTO getLoginCompany() throws BizException;
 }

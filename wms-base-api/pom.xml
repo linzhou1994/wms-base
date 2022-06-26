@@ -18,6 +18,11 @@
     <dependencies>
         <dependency>
             <groupId>org.wms</groupId>
+            <artifactId>single-sign-on-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wms</groupId>
             <artifactId>spring-dubbo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

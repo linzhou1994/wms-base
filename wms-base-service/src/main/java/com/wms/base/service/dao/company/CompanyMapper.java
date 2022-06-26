@@ -77,4 +77,6 @@ public interface CompanyMapper {
      * @return
      */
     int updateComPanyStatus(@Param("companyId") Long companyId, @Param("status") Integer status);
+
+    List<CompanyEntity> selectByIds(@Param("companyIds") List<Long> companyIds);
 }

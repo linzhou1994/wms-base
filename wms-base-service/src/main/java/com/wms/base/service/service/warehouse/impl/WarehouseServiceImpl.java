@@ -1,10 +1,32 @@
 package com.wms.base.service.service.warehouse.impl;
 
+import com.example.singlesignonapi.utils.LoginUtil;
+import com.java.utils.assertutil.AssertUtil;
+import com.java.utils.exception.BizException;
+import com.spring.utils.bean.BeanCopy;
+import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.service.dao.warehouse.WarehouseMapper;
 import com.wms.base.service.model.dto.warehouse.GetWarehouseListDTO;
+import com.wms.base.service.model.dto.warehouse.WarehouseDTO;
+import com.wms.base.service.model.entity.company.CompanyEntity;
+import com.wms.base.service.model.entity.warehouse.WarehouseEntity;
+import com.wms.base.service.model.entity.warehouse.WarehouseUserRelaEntity;
+import com.wms.base.service.model.enums.company.CompanyStatusEnum;
+import com.wms.base.service.model.enums.error.WmsBaseErrorCodeEnum;
+import com.wms.base.service.model.enums.redis.RedisCacheKeyEnum;
+import com.wms.base.service.model.enums.warehouse.WarehouseStatusEnum;
+import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.service.service.warehouse.WarehouseService;
+import com.wms.base.service.service.warehouse.WarehouseUserRelaService;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.annotation.Resource;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * CopyRight : <company domain>
@@ -19,14 +41,110 @@ import java.util.List;
  */
 @Service
 public class WarehouseServiceImpl implements WarehouseService {
+    @Autowired
+    private WarehouseUserRelaService warehouseUserRelaService;
+    @Autowired
+    private CompanyService companyService;
+    @Autowired
+    private WarehouseMapper warehouseMapper;
+    @Resource
+    private RedisTemplate<String, Long> redisTemplate;
+
+
     @Override
     public List<GetWarehouseListDTO> getWarehouseListDTO() {
+        List<WarehouseUserRelaEntity> warehouseUserRelaEntities = warehouseUserRelaService.getBandWarehouseIds();
 
-        return null;
+        List<Long> companyIds = warehouseUserRelaEntities.stream()
+                .map(WarehouseUserRelaEntity::getCompanyId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        List<Long> warehouseIds = warehouseUserRelaEntities.stream()
+                .map(WarehouseUserRelaEntity::getWarehouseId)
+                .collect(Collectors.toList());
+
+        List<CompanyEntity> companyEntities = companyService.getCompanyByIds(companyIds)
+                .stream()
+                .filter(o -> Objects.equals(o.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()))
+                .collect(Collectors.toList());
+
+        Map<Long, List<WarehouseEntity>> companyId2warehouse = getWarehouseByIds(warehouseIds)
+                .stream()
+                .filter(o -> Objects.equals(o.getWarehouseStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()))
+                .collect(Collectors.groupingBy(WarehouseEntity::getCompanyId));
+
+
+        List<GetWarehouseListDTO> rlt = new ArrayList<>(companyEntities.size());
+        for (CompanyEntity companyEntity : companyEntities) {
+            GetWarehouseListDTO dto = new GetWarehouseListDTO();
+            dto.setCompanyId(companyEntity.getId());
+            dto.setCompanyName(companyEntity.getCompanyName());
+            List<WarehouseEntity> warehouseEntities = companyId2warehouse.get(companyEntity.getId());
+            dto.setWarehouseList(BeanCopy.copyList(warehouseEntities, WarehouseDTO.class));
+        }
+
+
+        return rlt;
     }
 
     @Override
-    public void chooseWareHouse(Long warehouseId) {
+    public void chooseWareHouse(Long warehouseId) throws BizException {
+        String ticket = LoginUtil.getLoginContext().getTicket();
+        List<Long> warehouseIds = warehouseUserRelaService.getBandWarehouseIds()
+                .stream()
+                .map(WarehouseUserRelaEntity::getWarehouseId)
+                .distinct()
+                .collect(Collectors.toList());
+        AssertUtil.isTrue(warehouseIds.contains(warehouseId), WmsBaseErrorCodeEnum.USER_IS_NOT_WAREHOUSE_STAFF);
+        WarehouseEntity warehouse = getWarehouseById(warehouseId);
+        AssertUtil.isNotNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_NOT_EXISTS);
+        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ALLOW_LOGIN.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
 
+        refreshChooseWarehouse(warehouseId, ticket);
     }
+
+    @Override
+    public LoginWarehouseDTO getLoginWarehouseDTO() throws BizException {
+        String ticket = LoginUtil.getLoginContext().getTicket();
+        String redisKey = RedisCacheKeyEnum.LOGIN_WAREHOUSE_TICKET_CACHE.getKey(ticket);
+        Long warehouseId = redisTemplate.boundValueOps(redisKey).get();
+        if (Objects.isNull(warehouseId)){
+            return null;
+        }
+        WarehouseEntity warehouse = getWarehouseById(warehouseId);
+        AssertUtil.isNotNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_NOT_EXISTS);
+        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ALLOW_LOGIN.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
+        return BeanCopy.copy(warehouse, LoginWarehouseDTO.class);
+    }
+
+    @Override
+    public List<WarehouseEntity> getWarehouseByIds(List<Long> warehouseIds) {
+        if (CollectionUtils.isEmpty(warehouseIds)) {
+            return Collections.emptyList();
+        }
+        return warehouseMapper.selectByIds(warehouseIds);
+    }
+
+
+    @Override
+    public WarehouseEntity getWarehouseById(Long warehouseId) {
+        if (Objects.isNull(warehouseId) || warehouseId <= 0L) {
+            return null;
+        }
+        return warehouseMapper.selectByPrimaryKey(warehouseId);
+    }
+
+    /**
+     * 刷新选择企业的过期时间
+     *
+     * @param warehouseId
+     * @param ticket
+     */
+    private void refreshChooseWarehouse(Long warehouseId, String ticket) {
+        String redisKey = RedisCacheKeyEnum.LOGIN_WAREHOUSE_TICKET_CACHE.getKey(ticket);
+        redisTemplate.boundValueOps(redisKey)
+                .set(warehouseId, RedisCacheKeyEnum.LOGIN_WAREHOUSE_TICKET_CACHE.getTimeout(), TimeUnit.HOURS);
+    }
+
 }

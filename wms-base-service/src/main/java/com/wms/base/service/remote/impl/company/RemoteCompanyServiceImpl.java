@@ -3,7 +3,7 @@ package com.wms.base.service.remote.impl.company;
 import com.java.utils.exception.BizException;
 import com.spring.dubbo.annotation.RpcService;
 import com.wms.base.api.remote.company.RemoteCompanyService;
-import com.wms.base.api.dto.company.CompanyDTO;
+import com.wms.base.api.dto.company.LoginCompanyDTO;
 import com.wms.base.service.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +24,7 @@ public class RemoteCompanyServiceImpl implements RemoteCompanyService {
     private CompanyService companyService;
 
     @Override
-    public CompanyDTO getLoginCompany() throws BizException {
+    public LoginCompanyDTO getLoginCompany() throws BizException {
         return companyService.getLoginCompany();
     }
 }

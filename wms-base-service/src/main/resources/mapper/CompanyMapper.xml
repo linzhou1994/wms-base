@@ -32,7 +32,8 @@
         from t_company
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.company.CompanyEntity"
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.wms.base.service.model.entity.company.CompanyEntity"
             useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into t_company (company_name, company_code, company_type,
@@ -281,8 +282,18 @@
     </select>
 
     <update id="updateComPanyStatus">
-        update  t_company
+        update t_company
         set company_status =#{status}
         where id = #{companyId}
     </update>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_company
+        where id in
+        <foreach collection="companyIds" item="item" open="(" separator="," close="),">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

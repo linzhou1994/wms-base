@@ -1,12 +1,15 @@
 package com.wms.base.service.dao.company;
 
 import com.wms.base.service.model.entity.company.CompanyUserRelaEntity;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface CompanyUserRelaMapper {
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -14,6 +17,7 @@ public interface CompanyUserRelaMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -21,6 +25,7 @@ public interface CompanyUserRelaMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -28,6 +33,7 @@ public interface CompanyUserRelaMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -35,6 +41,7 @@ public interface CompanyUserRelaMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -42,6 +49,7 @@ public interface CompanyUserRelaMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */
@@ -52,4 +60,6 @@ public interface CompanyUserRelaMapper {
     int updateBatchSelective(List<CompanyUserRelaEntity> list);
 
     int batchInsert(@Param("list") List<CompanyUserRelaEntity> list);
+
+    List<CompanyUserRelaEntity> selectByUserId(@Param("userId") Long userId, @Param("status") Integer status);
 }

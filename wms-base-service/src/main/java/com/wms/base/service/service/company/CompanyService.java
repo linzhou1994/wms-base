@@ -1,9 +1,11 @@
 package com.wms.base.service.service.company;
 
 import com.java.utils.exception.BizException;
-import com.wms.base.api.dto.company.CompanyDTO;
+import com.wms.base.api.dto.company.LoginCompanyDTO;
 import com.wms.base.service.model.param.company.CreateCompanyParam;
 import com.wms.base.service.model.entity.company.CompanyEntity;
+
+import java.util.List;
 
 /**
  * CopyRight : <company domain>
@@ -53,5 +55,13 @@ public interface CompanyService {
     /**
      * 获取登录的企业
      */
-    CompanyDTO getLoginCompany() throws BizException;
+    LoginCompanyDTO getLoginCompany() throws BizException;
+
+    /**
+     * 通过id获取企业
+     *
+     * @param companyIds
+     * @return
+     */
+    List<CompanyEntity> getCompanyByIds(List<Long> companyIds);
 }

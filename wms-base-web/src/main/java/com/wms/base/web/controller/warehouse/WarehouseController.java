@@ -1,9 +1,8 @@
 package com.wms.base.web.controller.warehouse;
 
+import com.java.utils.exception.BizException;
 import com.java.utils.result.Result;
 import com.spring.utils.bean.BeanCopy;
-import com.wms.base.api.annotation.NotLoginCompany;
-import com.wms.base.api.annotation.NotLoginWarehouse;
 import com.wms.base.service.model.dto.warehouse.GetWarehouseListDTO;
 import com.wms.base.service.service.warehouse.WarehouseService;
 import com.wms.base.web.request.IdRequest;
@@ -39,7 +38,6 @@ public class WarehouseController {
      *
      * @return
      */
-    @NotLoginCompany
     @RequestMapping("getWareHouseList")
     public Result<List<GetWarehouseListVo>> getWareHouseList() {
         List<GetWarehouseListDTO> warehouseList = warehouseService.getWarehouseListDTO();
@@ -52,9 +50,8 @@ public class WarehouseController {
      * @param idRequest 要选择的仓库id
      * @return
      */
-    @NotLoginCompany
     @RequestMapping("chooseWareHouse")
-    public Result chooseWareHouse(@RequestBody IdRequest idRequest) {
+    public Result chooseWareHouse(@RequestBody IdRequest idRequest) throws BizException {
         warehouseService.chooseWareHouse(idRequest.getId());
         return Result.success();
     }

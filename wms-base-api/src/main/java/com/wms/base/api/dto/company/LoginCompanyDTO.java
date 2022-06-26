@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 公司id
  */
-public class CompanyDTO implements Serializable {
+public class LoginCompanyDTO implements Serializable {
     private Long id;
 
     /**

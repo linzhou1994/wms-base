@@ -1,272 +1,286 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wms.base.service.dao.warehouse.WarehouseMapper">
-  <resultMap id="BaseResultMap" type="com.wms.base.service.model.entity.warehouse.WarehouseEntity">
-    <!--@mbg.generated-->
-    <!--@Table t_warehouse-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
-    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
-    <result column="company_id" jdbcType="BIGINT" property="companyId" />
-    <result column="warehouse_status" jdbcType="TINYINT" property="warehouseStatus" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="create_id" jdbcType="BIGINT" property="createId" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="update_id" jdbcType="BIGINT" property="updateId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, warehouse_name, warehouse_code, company_id, warehouse_status, create_date, create_id, 
-    update_date, update_id
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from t_warehouse
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from t_warehouse
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_warehouse (warehouse_name, warehouse_code, company_id, 
-      warehouse_status, create_date, create_id, 
-      update_date, update_id)
-    values (#{warehouseName,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
-      #{warehouseStatus,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_warehouse
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="warehouseName != null">
-        warehouse_name,
-      </if>
-      <if test="warehouseCode != null">
-        warehouse_code,
-      </if>
-      <if test="companyId != null">
-        company_id,
-      </if>
-      <if test="warehouseStatus != null">
-        warehouse_status,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="createId != null">
-        create_id,
-      </if>
-      <if test="updateDate != null">
-        update_date,
-      </if>
-      <if test="updateId != null">
-        update_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="warehouseName != null">
-        #{warehouseName,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouseCode != null">
-        #{warehouseCode,jdbcType=VARCHAR},
-      </if>
-      <if test="companyId != null">
-        #{companyId,jdbcType=BIGINT},
-      </if>
-      <if test="warehouseStatus != null">
-        #{warehouseStatus,jdbcType=TINYINT},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        #{createId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        #{updateId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity">
-    <!--@mbg.generated-->
-    update t_warehouse
-    <set>
-      <if test="warehouseName != null">
-        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouseCode != null">
-        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
-      </if>
-      <if test="companyId != null">
-        company_id = #{companyId,jdbcType=BIGINT},
-      </if>
-      <if test="warehouseStatus != null">
-        warehouse_status = #{warehouseStatus,jdbcType=TINYINT},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        create_id = #{createId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        update_id = #{updateId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity">
-    <!--@mbg.generated-->
-    update t_warehouse
-    set warehouse_name = #{warehouseName,jdbcType=VARCHAR},
-      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
-      company_id = #{companyId,jdbcType=BIGINT},
-      warehouse_status = #{warehouseStatus,jdbcType=TINYINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_id = #{createId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_id = #{updateId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update t_warehouse
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="warehouse_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseName,jdbcType=VARCHAR}
+    <resultMap id="BaseResultMap" type="com.wms.base.service.model.entity.warehouse.WarehouseEntity">
+        <!--@mbg.generated-->
+        <!--@Table t_warehouse-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode"/>
+        <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="warehouse_status" jdbcType="TINYINT" property="warehouseStatus"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_id" jdbcType="BIGINT" property="updateId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, warehouse_name, warehouse_code, company_id, warehouse_status, create_date, create_id,
+        update_date, update_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from t_warehouse
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete
+        from t_warehouse
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_warehouse (warehouse_name, warehouse_code, company_id,
+                                 warehouse_status, create_date, create_id,
+                                 update_date, update_id)
+        values (#{warehouseName,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT},
+                #{warehouseStatus,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT},
+                #{updateDate,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_warehouse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="warehouseStatus != null">
+                warehouse_status,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateId != null">
+                update_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="warehouseStatus != null">
+                #{warehouseStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                #{updateId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity">
+        <!--@mbg.generated-->
+        update t_warehouse
+        <set>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="warehouseStatus != null">
+                warehouse_status = #{warehouseStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                update_id = #{updateId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wms.base.service.model.entity.warehouse.WarehouseEntity">
+        <!--@mbg.generated-->
+        update t_warehouse
+        set warehouse_name   = #{warehouseName,jdbcType=VARCHAR},
+            warehouse_code   = #{warehouseCode,jdbcType=VARCHAR},
+            company_id       = #{companyId,jdbcType=BIGINT},
+            warehouse_status = #{warehouseStatus,jdbcType=TINYINT},
+            create_date      = #{createDate,jdbcType=TIMESTAMP},
+            create_id        = #{createId,jdbcType=BIGINT},
+            update_date      = #{updateDate,jdbcType=TIMESTAMP},
+            update_id        = #{updateId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_warehouse
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="warehouse_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseName,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseCode,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="company_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.companyId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_status = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseStatus,jdbcType=TINYINT}
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="create_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="update_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="update_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="warehouse_code = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseCode,jdbcType=VARCHAR}
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_warehouse
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="warehouse_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.warehouseName != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.warehouseCode != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseCode,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="company_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.companyId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.companyId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_status = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.warehouseStatus != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseStatus,jdbcType=TINYINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createDate != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateDate != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="company_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.companyId,jdbcType=BIGINT}
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_warehouse
+        (warehouse_name, warehouse_code, company_id, warehouse_status, create_date, create_id,
+         update_date, update_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.warehouseName,jdbcType=VARCHAR}, #{item.warehouseCode,jdbcType=VARCHAR},
+             #{item.companyId,jdbcType=BIGINT}, #{item.warehouseStatus,jdbcType=TINYINT},
+             #{item.createDate,jdbcType=TIMESTAMP},
+             #{item.createId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.updateId,jdbcType=BIGINT})
         </foreach>
-      </trim>
-      <trim prefix="warehouse_status = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseStatus,jdbcType=TINYINT}
+    </insert>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_warehouse
+        where id in
+        <foreach collection="warehouseIds" item="item" open="(" separator="," close=")">
+            #{item}
         </foreach>
-      </trim>
-      <trim prefix="create_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="create_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="update_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="update_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update t_warehouse
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="warehouse_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.warehouseName != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseName,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="warehouse_code = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.warehouseCode != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseCode,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="company_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.companyId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.companyId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="warehouse_status = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.warehouseStatus != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseStatus,jdbcType=TINYINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createDate != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateDate != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_warehouse
-    (warehouse_name, warehouse_code, company_id, warehouse_status, create_date, create_id, 
-      update_date, update_id)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.warehouseName,jdbcType=VARCHAR}, #{item.warehouseCode,jdbcType=VARCHAR}, 
-        #{item.companyId,jdbcType=BIGINT}, #{item.warehouseStatus,jdbcType=TINYINT}, #{item.createDate,jdbcType=TIMESTAMP}, 
-        #{item.createId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.updateId,jdbcType=BIGINT}
-        )
-    </foreach>
-  </insert>
+    </select>
 </mapper>

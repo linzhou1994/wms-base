@@ -18,4 +18,10 @@ public interface CompanyUserRelaService {
      * @param userIds
      */
     void bandCompanyUser(Long companyId, List<Long> userIds) throws BizException;
+
+    /**
+     * 获取当前用户绑定的企业id
+     * @return
+     */
+    List<Long> getBandCompanyId() throws BizException;
 }

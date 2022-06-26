@@ -243,4 +243,10 @@
         #{item.updateId,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_company_user_rela
+    where user_id = #{userId} and status = #{status}
+  </select>
 </mapper>

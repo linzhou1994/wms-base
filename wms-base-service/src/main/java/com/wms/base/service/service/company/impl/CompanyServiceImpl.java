@@ -5,7 +5,7 @@ import com.java.utils.assertutil.AssertUtil;
 import com.java.utils.exception.BizException;
 import com.spring.utils.bean.BeanCopy;
 import com.wms.base.service.dao.company.CompanyMapper;
-import com.wms.base.api.dto.company.CompanyDTO;
+import com.wms.base.api.dto.company.LoginCompanyDTO;
 import com.wms.base.service.model.param.company.CreateCompanyParam;
 import com.wms.base.service.model.enums.company.CompanyStatusEnum;
 import com.wms.base.service.model.enums.error.WmsBaseErrorCodeEnum;
@@ -13,12 +13,14 @@ import com.wms.base.service.model.enums.redis.RedisCacheKeyEnum;
 import com.wms.base.service.model.entity.company.CompanyEntity;
 import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.service.service.company.CompanyUserRelaService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -71,6 +73,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void chooseCompany(Long companyId) throws BizException {
         String ticket = LoginUtil.getLoginContext().getTicket();
+        List<Long> bandCompanyId = companyUserRelaService.getBandCompanyId();
+        AssertUtil.isTrue(bandCompanyId.contains(companyId), WmsBaseErrorCodeEnum.USER_IS_NOT_COMPANY_STAFF);
         CompanyEntity company = getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
         AssertUtil.isNotEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
@@ -80,10 +84,13 @@ public class CompanyServiceImpl implements CompanyService {
 
 
     @Override
-    public CompanyDTO getLoginCompany() throws BizException {
+    public LoginCompanyDTO getLoginCompany() throws BizException {
         String ticket = LoginUtil.getLoginContext().getTicket();
         String redisKey = RedisCacheKeyEnum.LOGIN_COMPANY_TICKET_CACHE.getKey(ticket);
         Long companyId = redisTemplate.boundValueOps(redisKey).get();
+        if (Objects.isNull(companyId)) {
+            return null;
+        }
 
         CompanyEntity company = getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
@@ -91,7 +98,16 @@ public class CompanyServiceImpl implements CompanyService {
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
         refreshChooseCompany(companyId, ticket);
 
-        return BeanCopy.copy(company, CompanyDTO.class);
+        return BeanCopy.copy(company, LoginCompanyDTO.class);
+    }
+
+    @Override
+    public List<CompanyEntity> getCompanyByIds(List<Long> companyIds) {
+        if (CollectionUtils.isEmpty(companyIds)){
+            return Collections.emptyList();
+        }
+
+        return companyMapper.selectByIds(companyIds);
     }
 
 
