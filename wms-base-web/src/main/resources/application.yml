@@ -1,0 +1,51 @@
+spring:
+  datasource:
+    username: root
+    password: 19941029lz09
+    url: jdbc:mysql://www.linzhou.link:3306/sso?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+
+  redis:
+    host: www.linzhou.link
+    database: 0
+    port: 6379
+    password: linzhou
+  application:
+    name: wms-base
+
+
+###dubbo 注册到注册中心的名称
+  dubbo:
+    application:
+      name: wms-base
+    ##采用协议方式和端口号
+    protocol:
+      ## 常用协议：dubbo,http,webService等
+      name: dubbo
+      ## 发布dubbo端口号为20880
+      port: 20882
+    registry:
+      ## dubbo注册中心地址 zookeeper地址
+      address: zookeeper://www.linzhou.link:2181
+    scan: com.example
+    provider:
+      filter: dubboLogFilter
+
+#dubbo:
+#  application:
+#    name: wms #???
+#  registry:
+#    address: zookeeper://www.linzhou.link #zookeeper??
+#    port: 2181 #???????
+#  protocol:
+#    name: dubbo
+#    port: 20893 #dubbo???????
+#  provider:
+#    filter: dubboLogFilter
+#  scan: com.example.singlesignonservice.remote.impl
+#    # 接口实现者（服务实现）包
+##    base-packages: com.example.singlesignonservice.remote.impl
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.wms.base.service.model
