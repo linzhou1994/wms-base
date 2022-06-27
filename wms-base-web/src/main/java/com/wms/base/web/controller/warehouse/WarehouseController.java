@@ -9,12 +9,14 @@ import com.wms.base.service.service.warehouse.WarehouseService;
 import com.wms.base.web.request.IdRequest;
 import com.wms.base.web.request.warehouse.CreateWarehouseRequest;
 import com.wms.base.web.vo.warehouse.GetWarehouseListVo;
+import com.wms.base.web.vo.warehouse.WarehouseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +46,15 @@ public class WarehouseController {
     @RequestMapping("getWarehouseList")
     public Result<List<GetWarehouseListVo>> getWarehouseList() throws BizException {
         List<GetWarehouseListDTO> warehouseList = warehouseService.getWarehouseListDTO();
-        return Result.success(BeanCopy.copyList(warehouseList, GetWarehouseListVo.class));
+        List<GetWarehouseListVo> data = new ArrayList<>();
+        for (GetWarehouseListDTO dto : warehouseList) {
+            GetWarehouseListVo copy = BeanCopy.copy(dto, GetWarehouseListVo.class);
+            copy.setWarehouseList(BeanCopy.copyList(dto.getWarehouseList(), WarehouseVo.class));
+            data.add(copy);
+        }
+
+
+        return Result.success(data);
     }
 
     /**

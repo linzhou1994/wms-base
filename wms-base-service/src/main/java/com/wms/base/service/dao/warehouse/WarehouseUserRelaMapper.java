@@ -1,5 +1,6 @@
 package com.wms.base.service.dao.warehouse;
 
+import com.wms.base.service.model.entity.warehouse.WarehouseEntity;
 import com.wms.base.service.model.entity.warehouse.WarehouseUserRelaEntity;
 
 import java.util.List;
@@ -62,4 +63,10 @@ public interface WarehouseUserRelaMapper {
     int batchInsert(@Param("list") List<WarehouseUserRelaEntity> list);
 
     List<WarehouseUserRelaEntity> selectByUserId(@Param("userId") Long userId);
+
+
+    List<WarehouseUserRelaEntity> selectByWarehouseIdAndUserIds(@Param("warehouseId") Long warehouseId, @Param("userIds") List<Long> userIds);
+
+
+    int updateStatusByWarehouseAndUserIds(@Param("warehouseId") Long warehouseId, @Param("userIds") List<Long> userIds, @Param("status") Integer status);
 }

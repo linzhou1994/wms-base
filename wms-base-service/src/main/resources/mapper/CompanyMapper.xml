@@ -292,7 +292,7 @@
         <include refid="Base_Column_List"/>
         from t_company
         where id in
-        <foreach collection="companyIds" item="item" open="(" separator="," close="),">
+        <foreach collection="companyIds" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>

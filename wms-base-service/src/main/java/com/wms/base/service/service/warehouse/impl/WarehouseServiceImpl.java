@@ -94,6 +94,7 @@ public class WarehouseServiceImpl implements WarehouseService {
             dto.setCompanyName(companyEntity.getCompanyName());
             List<WarehouseEntity> warehouseEntities = companyId2warehouse.get(companyEntity.getId());
             dto.setWarehouseList(BeanCopy.copyList(warehouseEntities, WarehouseDTO.class));
+            rlt.add(dto);
         }
 
 
@@ -173,6 +174,8 @@ public class WarehouseServiceImpl implements WarehouseService {
         entity.setCreateId(LoginWarehouseUtils.getUserId());
         entity.setCompanyId(LoginWarehouseUtils.getLoginCompanyId());
         warehouseMapper.insertSelective(entity);
+        //绑定员工关联关系
+        warehouseUserRelaService.bandWarehouseUser(entity.getId(), Collections.singletonList(LoginWarehouseUtils.getUserId()));
         return entity;
     }
 

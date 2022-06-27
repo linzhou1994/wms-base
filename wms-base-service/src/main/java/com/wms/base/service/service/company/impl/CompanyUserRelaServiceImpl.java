@@ -11,10 +11,12 @@ import com.wms.base.service.model.enums.rela.RelaStatusEnum;
 import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.service.service.company.CompanyUserRelaService;
 import com.wms.singlesignonapi.utils.LoginUtil;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,10 +50,22 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
         AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
 
+        List<CompanyUserRelaEntity> oldRelaList =companyUserRelaMapper.selectByUserIdsAndCompanyId(userIds,companyId);
+        List<Long> oldRelaUserIds = oldRelaList.stream()
+                .map(CompanyUserRelaEntity::getUserId)
+                .distinct()
+                .collect(Collectors.toList());
+        if (CollectionUtils.isNotEmpty(oldRelaUserIds)){
+            companyUserRelaMapper.updateStatusByUserIdsAndCompanyId(userIds,companyId,RelaStatusEnum.ALLOW_LOGIN.getCode());
+        }
+
         Long loginUserId = LoginUtil.getUserId();
 
         List<CompanyUserRelaEntity> needBandRelaList = new ArrayList<>(userIds.size());
         for (Long userId : userIds) {
+            if (oldRelaUserIds.contains(userId)){
+                continue;
+            }
             CompanyUserRelaEntity entity = new CompanyUserRelaEntity();
             entity.setCompanyId(companyId);
             entity.setUserId(userId);
@@ -63,7 +77,9 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
             needBandRelaList.add(entity);
 
         }
-        companyUserRelaMapper.batchInsert(needBandRelaList);
+        if (CollectionUtils.isNotEmpty(needBandRelaList)){
+            companyUserRelaMapper.batchInsert(needBandRelaList);
+        }
     }
 
     @Override

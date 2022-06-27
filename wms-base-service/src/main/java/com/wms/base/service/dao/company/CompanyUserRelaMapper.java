@@ -1,5 +1,6 @@
 package com.wms.base.service.dao.company;
 
+import com.wms.base.service.model.entity.company.CompanyEntity;
 import com.wms.base.service.model.entity.company.CompanyUserRelaEntity;
 
 import java.util.List;
@@ -62,4 +63,8 @@ public interface CompanyUserRelaMapper {
     int batchInsert(@Param("list") List<CompanyUserRelaEntity> list);
 
     List<CompanyUserRelaEntity> selectByUserId(@Param("userId") Long userId, @Param("status") Integer status);
+
+    List<CompanyUserRelaEntity> selectByUserIdsAndCompanyId(@Param("userIds") List<Long> userIds, @Param("companyId") Long companyId);
+
+    int updateStatusByUserIdsAndCompanyId(@Param("userIds") List<Long> userIds, @Param("companyId") Long companyId, @Param("status") Integer status);
 }

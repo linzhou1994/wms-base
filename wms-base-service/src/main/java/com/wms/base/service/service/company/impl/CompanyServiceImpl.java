@@ -96,7 +96,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         CompanyEntity company = getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
-        AssertUtil.isNotEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
+        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
         refreshChooseCompany(companyId, ticket);
 

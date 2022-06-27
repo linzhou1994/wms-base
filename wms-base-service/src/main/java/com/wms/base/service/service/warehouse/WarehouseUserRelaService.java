@@ -15,4 +15,12 @@ public interface WarehouseUserRelaService {
      * @return
      */
     List<WarehouseUserRelaEntity> getBandWarehouseIds() throws BizException;
+
+    /**
+     * 仓库绑定员工
+     *
+     * @param warehouseId
+     * @param userIds
+     */
+    void bandWarehouseUser(Long warehouseId, List<Long> userIds) throws BizException;
 }
