@@ -9,6 +9,7 @@ import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.web.request.IdRequest;
 import com.wms.base.web.request.company.CreateCompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class CompanyController {
      * @return
      * @throws BizException
      */
-    @RequestMapping("createCompany")
+    @PostMapping("createCompany")
     public Result<Long> createCompany(@RequestBody CreateCompanyRequest createCompanyParam) throws BizException {
 
         CreateCompanyParam copy = BeanCopy.copy(createCompanyParam, CreateCompanyParam.class);
@@ -54,7 +55,7 @@ public class CompanyController {
      * @return
      * @throws BizException
      */
-    @RequestMapping("freezeCompany")
+    @PostMapping("freezeCompany")
     public Result freezeCompany(@RequestBody IdRequest idRequest) throws BizException {
 
         companyService.freezeCompany(idRequest.getId());
@@ -64,10 +65,11 @@ public class CompanyController {
 
     /**
      * 登录用户选择登陆的企业
+     *
      * @param idRequest 要登录的企业id
      * @return
      */
-    @RequestMapping("chooseCompany")
+    @PostMapping("chooseCompany")
     public Result chooseCompany(@RequestBody IdRequest idRequest) throws BizException {
         companyService.chooseCompany(idRequest.getId());
         return Result.success();

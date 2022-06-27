@@ -1,5 +1,6 @@
 package com.wms.base.service.service.warehouse;
 
+import com.java.utils.exception.BizException;
 import com.wms.base.service.model.entity.warehouse.WarehouseUserRelaEntity;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface WarehouseUserRelaService {
      *
      * @return
      */
-    List<WarehouseUserRelaEntity> getBandWarehouseIds();
+    List<WarehouseUserRelaEntity> getBandWarehouseIds() throws BizException;
 }

@@ -4,7 +4,6 @@ import com.wms.base.api.dto.company.LoginCompanyDTO;
 import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
 import lombok.Data;
 
-import javax.security.auth.login.LoginContext;
 import java.io.Serializable;
 
 /**
@@ -20,7 +19,12 @@ import java.io.Serializable;
  */
 @Data
 public class LoginWarehouseContext implements Serializable {
-    private LoginContext loginContext;
+    /**
+     * 登陆的且也信息
+     */
     private LoginCompanyDTO loginCompany;
+    /**
+     * 登陆的仓库信息
+     */
     private LoginWarehouseDTO loginWarehouse;
 }

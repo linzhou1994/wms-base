@@ -1,10 +1,14 @@
 package com.wms.base.api.interceptor.handler;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
-import com.example.singlesignonapi.interceptor.handler.LoginHandler;
+import com.wms.base.api.dto.company.LoginCompanyDTO;
+import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
 import com.wms.base.api.remote.company.RemoteCompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.wms.base.api.remote.warehouse.RemoteWarehouseService;
+import com.wms.base.api.utils.LoginWarehouseUtils;
+import com.wms.singlesignonapi.interceptor.handler.LoginHandler;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,19 +24,25 @@ import javax.servlet.http.HttpServletResponse;
  * @version : 1.0
  * @since : 1.0
  */
-@Service
+@Component
+@Order(10)
 public class CompanyWarehouseHandler implements LoginHandler {
 
     @Reference
     private RemoteCompanyService remoteCompanyService;
+    @Reference
+    private RemoteWarehouseService remoteWarehouseService;
 
     @Override
     public void preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        LoginHandler.super.preHandle(request, response, handler);
+        LoginCompanyDTO loginCompany = remoteCompanyService.getLoginCompany();
+        LoginWarehouseDTO loginWarehouse = remoteWarehouseService.getLoginWarehouse();
+        LoginWarehouseUtils.setLoginWarehouse(loginWarehouse);
+        LoginWarehouseUtils.setLoginCompany(loginCompany);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        LoginHandler.super.afterCompletion(request, response, handler, ex);
+        LoginWarehouseUtils.remove();
     }
 }

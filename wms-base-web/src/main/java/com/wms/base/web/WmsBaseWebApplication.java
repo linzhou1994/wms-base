@@ -18,7 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.wms.base"})
-@MapperScan("com.wms.base")
+@MapperScan("com.wms.base.service.dao")
 public class WmsBaseWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(WmsBaseWebApplication.class, args);

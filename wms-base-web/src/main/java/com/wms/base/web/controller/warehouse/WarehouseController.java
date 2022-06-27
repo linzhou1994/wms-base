@@ -4,10 +4,13 @@ import com.java.utils.exception.BizException;
 import com.java.utils.result.Result;
 import com.spring.utils.bean.BeanCopy;
 import com.wms.base.service.model.dto.warehouse.GetWarehouseListDTO;
+import com.wms.base.service.model.param.warehouse.CreateWarehouseParam;
 import com.wms.base.service.service.warehouse.WarehouseService;
 import com.wms.base.web.request.IdRequest;
+import com.wms.base.web.request.warehouse.CreateWarehouseRequest;
 import com.wms.base.web.vo.warehouse.GetWarehouseListVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,8 +41,8 @@ public class WarehouseController {
      *
      * @return
      */
-    @RequestMapping("getWareHouseList")
-    public Result<List<GetWarehouseListVo>> getWareHouseList() {
+    @RequestMapping("getWarehouseList")
+    public Result<List<GetWarehouseListVo>> getWarehouseList() throws BizException {
         List<GetWarehouseListDTO> warehouseList = warehouseService.getWarehouseListDTO();
         return Result.success(BeanCopy.copyList(warehouseList, GetWarehouseListVo.class));
     }
@@ -50,11 +53,23 @@ public class WarehouseController {
      * @param idRequest 要选择的仓库id
      * @return
      */
-    @RequestMapping("chooseWareHouse")
-    public Result chooseWareHouse(@RequestBody IdRequest idRequest) throws BizException {
-        warehouseService.chooseWareHouse(idRequest.getId());
+    @PostMapping("chooseWarehouse")
+    public Result chooseWarehouse(@RequestBody IdRequest idRequest) throws BizException {
+        warehouseService.chooseWarehouse(idRequest.getId());
         return Result.success();
     }
 
+    /**
+     * 创建企业
+     *
+     * @param request
+     * @return
+     * @throws BizException
+     */
+    @PostMapping("createWarehouse")
+    private Result<Long> createWarehouse(@RequestBody CreateWarehouseRequest request) throws BizException {
+        Long warehouse = warehouseService.createWarehouse(BeanCopy.copy(request, CreateWarehouseParam.class));
+        return Result.success(warehouse);
+    }
 
 }

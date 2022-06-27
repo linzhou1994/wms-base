@@ -62,4 +62,6 @@ public interface WarehouseMapper {
     int batchInsert(@Param("list") List<WarehouseEntity> list);
 
     List<WarehouseEntity> selectByIds(@Param("warehouseIds") List<Long> warehouseIds);
+
+    WarehouseEntity selectByWarehouseCode(@Param("warehouseCode") String warehouseCode);
 }

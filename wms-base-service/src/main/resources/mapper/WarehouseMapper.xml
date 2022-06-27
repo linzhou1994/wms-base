@@ -283,4 +283,10 @@
             #{item}
         </foreach>
     </select>
+
+    <select id="selectByWarehouseCode" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from t_warehouse
+        where warehouse_code = #{warehouseCode}
+    </select>
 </mapper>

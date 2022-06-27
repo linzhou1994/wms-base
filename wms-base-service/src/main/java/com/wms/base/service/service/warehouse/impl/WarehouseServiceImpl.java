@@ -1,10 +1,10 @@
 package com.wms.base.service.service.warehouse.impl;
 
-import com.example.singlesignonapi.utils.LoginUtil;
 import com.java.utils.assertutil.AssertUtil;
 import com.java.utils.exception.BizException;
 import com.spring.utils.bean.BeanCopy;
 import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.api.utils.LoginWarehouseUtils;
 import com.wms.base.service.dao.warehouse.WarehouseMapper;
 import com.wms.base.service.model.dto.warehouse.GetWarehouseListDTO;
 import com.wms.base.service.model.dto.warehouse.WarehouseDTO;
@@ -15,13 +15,16 @@ import com.wms.base.service.model.enums.company.CompanyStatusEnum;
 import com.wms.base.service.model.enums.error.WmsBaseErrorCodeEnum;
 import com.wms.base.service.model.enums.redis.RedisCacheKeyEnum;
 import com.wms.base.service.model.enums.warehouse.WarehouseStatusEnum;
+import com.wms.base.service.model.param.warehouse.CreateWarehouseParam;
 import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.service.service.warehouse.WarehouseService;
 import com.wms.base.service.service.warehouse.WarehouseUserRelaService;
+import com.wms.singlesignonapi.utils.LoginUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -50,9 +53,18 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Resource
     private RedisTemplate<String, Long> redisTemplate;
 
+    @Override
+    @Transactional
+    public Long createWarehouse(CreateWarehouseParam createWarehouseParam) throws BizException {
+        checkCreateWarehouseParam(createWarehouseParam);
+        WarehouseEntity entity = doCreateWarehouse(createWarehouseParam);
+        return entity.getId();
+    }
+
 
     @Override
-    public List<GetWarehouseListDTO> getWarehouseListDTO() {
+    public List<GetWarehouseListDTO> getWarehouseListDTO() throws BizException {
+        //获取当前用户绑定的所有仓库
         List<WarehouseUserRelaEntity> warehouseUserRelaEntities = warehouseUserRelaService.getBandWarehouseIds();
 
         List<Long> companyIds = warehouseUserRelaEntities.stream()
@@ -89,7 +101,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public void chooseWareHouse(Long warehouseId) throws BizException {
+    public void chooseWarehouse(Long warehouseId) throws BizException {
         String ticket = LoginUtil.getLoginContext().getTicket();
         List<Long> warehouseIds = warehouseUserRelaService.getBandWarehouseIds()
                 .stream()
@@ -109,7 +121,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         String ticket = LoginUtil.getLoginContext().getTicket();
         String redisKey = RedisCacheKeyEnum.LOGIN_WAREHOUSE_TICKET_CACHE.getKey(ticket);
         Long warehouseId = redisTemplate.boundValueOps(redisKey).get();
-        if (Objects.isNull(warehouseId)){
+        if (Objects.isNull(warehouseId)) {
             return null;
         }
         WarehouseEntity warehouse = getWarehouseById(warehouseId);
@@ -145,6 +157,36 @@ public class WarehouseServiceImpl implements WarehouseService {
         String redisKey = RedisCacheKeyEnum.LOGIN_WAREHOUSE_TICKET_CACHE.getKey(ticket);
         redisTemplate.boundValueOps(redisKey)
                 .set(warehouseId, RedisCacheKeyEnum.LOGIN_WAREHOUSE_TICKET_CACHE.getTimeout(), TimeUnit.HOURS);
+    }
+
+
+    /**
+     * 创建仓库
+     *
+     * @param createWarehouseParam
+     * @return
+     * @throws BizException
+     */
+    private WarehouseEntity doCreateWarehouse(CreateWarehouseParam createWarehouseParam) throws BizException {
+        WarehouseEntity entity = BeanCopy.copy(createWarehouseParam, WarehouseEntity.class);
+        entity.setWarehouseStatus(WarehouseStatusEnum.ALLOW_LOGIN.getCode());
+        entity.setCreateId(LoginWarehouseUtils.getUserId());
+        entity.setCompanyId(LoginWarehouseUtils.getLoginCompanyId());
+        warehouseMapper.insertSelective(entity);
+        return entity;
+    }
+
+    /**
+     * 校验创建仓库的参数
+     *
+     * @param createWarehouseParam
+     * @throws BizException
+     */
+    private void checkCreateWarehouseParam(CreateWarehouseParam createWarehouseParam) throws BizException {
+        AssertUtil.isNotBlank(createWarehouseParam.getWarehouseName(), WmsBaseErrorCodeEnum.WAREHOUSE_NAME_IS_NOT_BLANK);
+        AssertUtil.isNotBlank(createWarehouseParam.getWarehouseCode(), WmsBaseErrorCodeEnum.WAREHOUSE_CODE_IS_NOT_BLANK);
+        WarehouseEntity warehouse = warehouseMapper.selectByWarehouseCode(createWarehouseParam.getWarehouseCode());
+        AssertUtil.isNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_CODE_EXISTS);
     }
 
 }

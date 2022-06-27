@@ -1,6 +1,5 @@
 package com.wms.base.service.service.company.impl;
 
-import com.example.singlesignonapi.utils.LoginUtil;
 import com.java.utils.assertutil.AssertUtil;
 import com.java.utils.exception.BizException;
 import com.spring.utils.bean.BeanCopy;
@@ -13,10 +12,12 @@ import com.wms.base.service.model.enums.redis.RedisCacheKeyEnum;
 import com.wms.base.service.model.entity.company.CompanyEntity;
 import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.service.service.company.CompanyUserRelaService;
+import com.wms.singlesignonapi.utils.LoginUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collections;
@@ -47,6 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
     private RedisTemplate<String, Long> redisTemplate;
 
     @Override
+    @Transactional
     public CompanyEntity createCompany(CreateCompanyParam createCompanyParam) throws BizException {
         //校验创建企业参数
         checkCreateCompany(createCompanyParam);
@@ -77,7 +79,7 @@ public class CompanyServiceImpl implements CompanyService {
         AssertUtil.isTrue(bandCompanyId.contains(companyId), WmsBaseErrorCodeEnum.USER_IS_NOT_COMPANY_STAFF);
         CompanyEntity company = getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
-        AssertUtil.isNotEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
+        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
         refreshChooseCompany(companyId, ticket);
     }

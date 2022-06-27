@@ -26,7 +26,7 @@ public class WarehouseUserRelaEntity {
     /**
     * 关联状态 0：正常 1：解除
     */
-    private Byte status;
+    private Integer status;
 
     /**
     * 创建时间
@@ -80,11 +80,11 @@ public class WarehouseUserRelaEntity {
         this.userId = userId;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

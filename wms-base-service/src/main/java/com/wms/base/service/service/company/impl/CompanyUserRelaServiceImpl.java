@@ -1,7 +1,5 @@
 package com.wms.base.service.service.company.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
-import com.example.singlesignonapi.utils.LoginUtil;
 import com.java.utils.assertutil.AssertUtil;
 import com.java.utils.exception.BizException;
 import com.wms.base.service.dao.company.CompanyUserRelaMapper;
@@ -12,9 +10,12 @@ import com.wms.base.service.model.entity.company.CompanyUserRelaEntity;
 import com.wms.base.service.model.enums.rela.RelaStatusEnum;
 import com.wms.base.service.service.company.CompanyService;
 import com.wms.base.service.service.company.CompanyUserRelaService;
+import com.wms.singlesignonapi.utils.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,7 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
         AssertUtil.isNotEmpty(userIds, WmsBaseErrorCodeEnum.COMPANY_USER_IDS_IS_NOT_NULL);
         CompanyEntity company = companyService.getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
-        AssertUtil.isNotEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
+        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
 
         Long loginUserId = LoginUtil.getUserId();
@@ -56,7 +57,11 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
             entity.setUserId(userId);
             entity.setCreateId(loginUserId);
             entity.setStatus(RelaStatusEnum.ALLOW_LOGIN.getCode());
+            Date now = new Date();
+            entity.setCreateDate(now);
+            entity.setUpdateDate(now);
             needBandRelaList.add(entity);
+
         }
         companyUserRelaMapper.batchInsert(needBandRelaList);
     }
