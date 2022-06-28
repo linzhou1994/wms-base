@@ -36,7 +36,8 @@ public enum WmsBaseErrorCodeEnum implements ErrorCode {
     WAREHOUSE_NAME_IS_NOT_BLANK("200004","仓库名称不能为空"),
     WAREHOUSE_CODE_IS_NOT_BLANK("200005","仓库编码不能为空"),
     WAREHOUSE_CODE_EXISTS("200006","仓库编码已存在"),
-    WAREHOUSE_USER_IDS_IS_NOT_NULL("100007", "企业员工不能为空"),
+    WAREHOUSE_USER_IDS_IS_NOT_NULL("100007", "仓库员工不能为空"),
+    WAREHOUSE_COMPANY_IDS_NOT_NULL("100008", "仓库供应商不能为空"),
 
     ;
     private String code;

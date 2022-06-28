@@ -1,12 +1,15 @@
 package com.wms.base.service.dao.warehouse;
 
 import com.wms.base.service.model.entity.warehouse.WarehouseCompanyRelaEntity;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface WarehouseCompanyRelaMapper {
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -14,6 +17,7 @@ public interface WarehouseCompanyRelaMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -21,6 +25,7 @@ public interface WarehouseCompanyRelaMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -28,6 +33,7 @@ public interface WarehouseCompanyRelaMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -35,6 +41,7 @@ public interface WarehouseCompanyRelaMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -42,6 +49,7 @@ public interface WarehouseCompanyRelaMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */
@@ -52,4 +60,8 @@ public interface WarehouseCompanyRelaMapper {
     int updateBatchSelective(List<WarehouseCompanyRelaEntity> list);
 
     int batchInsert(@Param("list") List<WarehouseCompanyRelaEntity> list);
+
+    int updateStatusByWarehouseIdAndCompanyIds(@Param("updatedStatus") Integer updatedStatus, @Param("warehouseId") Long warehouseId, @Param("companyIds") List<Long> companyIds);
+
+
 }

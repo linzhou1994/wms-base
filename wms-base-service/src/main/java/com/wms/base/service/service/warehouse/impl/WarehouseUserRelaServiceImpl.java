@@ -89,4 +89,26 @@ public class WarehouseUserRelaServiceImpl implements WarehouseUserRelaService {
         //绑定企业员工关系
         companyUserRelaService.bandCompanyUser(warehouse.getCompanyId(), userIds);
     }
+
+    @Override
+    public void bandWarehouseUser(List<Long> userIds) throws BizException {
+        Long warehouseId = LoginWarehouseUtils.getLoginWarehouseId();
+        bandWarehouseUser(warehouseId, userIds);
+    }
+
+    @Override
+    public void unBandWarehouseUser(Long warehouseId, List<Long> userIds) throws BizException {
+        AssertUtil.isNotEmpty(userIds, WmsBaseErrorCodeEnum.WAREHOUSE_USER_IDS_IS_NOT_NULL);
+        WarehouseEntity warehouse = warehouseService.getWarehouseById(warehouseId);
+        AssertUtil.isNotNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_NOT_EXISTS);
+
+        warehouseUserRelaMapper.updateStatusByWarehouseAndUserIds(warehouseId, userIds, RelaStatusEnum.FREEZE.getCode());
+
+    }
+
+    @Override
+    public void unBandWarehouseUser(List<Long> userIds) throws BizException {
+        Long warehouseId = LoginWarehouseUtils.getLoginWarehouseId();
+        unBandWarehouseUser(warehouseId, userIds);
+    }
 }
