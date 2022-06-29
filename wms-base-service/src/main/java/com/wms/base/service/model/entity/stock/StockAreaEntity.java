@@ -37,12 +37,9 @@ import java.util.Date;
  *
  * @date : 2022/6/28 23:13
  * @author: linzhou
- * @description : StockArea
+ * @description : StockAreaEntity
  */
-/**
-    * t_stock_area
-    */
-public class StockArea {
+public class StockAreaEntity {
     private Long id;
 
     /**

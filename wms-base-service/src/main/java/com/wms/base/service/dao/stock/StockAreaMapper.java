@@ -1,6 +1,6 @@
 package com.wms.base.service.dao.stock;
 
-import com.wms.base.service.model.entity.stock.StockArea;
+import com.wms.base.service.model.entity.stock.StockAreaEntity;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,19 +44,19 @@ import org.apache.ibatis.annotations.Param;
 public interface StockAreaMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(StockArea record);
+    int insert(StockAreaEntity record);
 
-    int insertSelective(StockArea record);
+    int insertSelective(StockAreaEntity record);
 
-    StockArea selectByPrimaryKey(Long id);
+    StockAreaEntity selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(StockArea record);
+    int updateByPrimaryKeySelective(StockAreaEntity record);
 
-    int updateByPrimaryKey(StockArea record);
+    int updateByPrimaryKey(StockAreaEntity record);
 
-    int updateBatch(List<StockArea> list);
+    int updateBatch(List<StockAreaEntity> list);
 
-    int updateBatchSelective(List<StockArea> list);
+    int updateBatchSelective(List<StockAreaEntity> list);
 
-    int batchInsert(@Param("list") List<StockArea> list);
+    int batchInsert(@Param("list") List<StockAreaEntity> list);
 }

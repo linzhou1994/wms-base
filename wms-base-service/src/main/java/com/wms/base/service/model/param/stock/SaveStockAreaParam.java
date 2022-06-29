@@ -1,15 +1,15 @@
-package com.wms.base.web.request.stock;
+package com.wms.base.service.model.param.stock;
 
 import lombok.Data;
-
-
 /**
  * @date : 2022/6/28 23:13
  * @author: linzhou
  * @description : StockArea
  */
 @Data
-public class CreateStockAreaRequest {
+public class SaveStockAreaParam {
+
+    private Long id;
 
     /**
     * 库区编号
@@ -27,9 +27,10 @@ public class CreateStockAreaRequest {
     private String areaType;
 
     /**
-    * 所属库
-    */
-    private Long warehouseId;
+     * 是否失效 0:正常 1：冻结
+     */
+    private String areaStatus;
+
 
     /**
     * 备注

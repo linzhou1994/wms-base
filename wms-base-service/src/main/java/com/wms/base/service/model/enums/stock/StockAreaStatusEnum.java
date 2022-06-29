@@ -40,6 +40,7 @@ package com.wms.base.service.model.enums.stock;
 public enum StockAreaStatusEnum {
     ALLOW_LOGIN("0","正常"),
     FREEZE("1","冻结"),
+    DELETE("2","删除"),
     ;
     private String code;
     private String msg;

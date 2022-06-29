@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wms.base.service.dao.stock.StockAreaMapper">
-  <resultMap id="BaseResultMap" type="com.wms.base.service.model.entity.stock.StockArea">
+  <resultMap id="BaseResultMap" type="com.wms.base.service.model.entity.stock.StockAreaEntity">
     <!--@mbg.generated-->
     <!--@Table t_stock_area-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -33,7 +33,7 @@
     delete from t_stock_area
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.stock.StockArea" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into t_stock_area (area_code, area_name, area_type, 
       warehouse_id, area_status, remark, 
@@ -44,7 +44,7 @@
       #{createDate,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{updateId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.stock.StockArea" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into t_stock_area
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -112,7 +112,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wms.base.service.model.entity.stock.StockArea">
+  <update id="updateByPrimaryKeySelective" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity">
     <!--@mbg.generated-->
     update t_stock_area
     <set>
@@ -149,7 +149,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wms.base.service.model.entity.stock.StockArea">
+  <update id="updateByPrimaryKey" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity">
     <!--@mbg.generated-->
     update t_stock_area
     set area_code = #{areaCode,jdbcType=VARCHAR},
