@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wms.base.service.dao.stock.StockPositionMapper">
+    <resultMap id="BaseResultMap" type="com.wms.base.service.model.entity.stock.StockPositionEntity">
+        <!--@mbg.generated-->
+        <!--@Table t_stock_position-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="stock_position_code" jdbcType="VARCHAR" property="stockPositionCode"/>
+        <result column="stock_position_name" jdbcType="VARCHAR" property="stockPositionName"/>
+        <result column="max_capacity" jdbcType="VARCHAR" property="maxCapacity"/>
+        <result column="stock_area_id" jdbcType="BIGINT" property="stockAreaId"/>
+        <result column="warehouse_id" jdbcType="BIGINT" property="warehouseId"/>
+        <result column="length" jdbcType="DECIMAL" property="length"/>
+        <result column="width" jdbcType="DECIMAL" property="width"/>
+        <result column="height" jdbcType="DECIMAL" property="height"/>
+        <result column="capacity" jdbcType="DECIMAL" property="capacity"/>
+        <result column="is_mixed" jdbcType="TINYINT" property="isMixed"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="stock_position_type" jdbcType="TINYINT" property="stockPositionType"/>
+        <result column="stock_position_put_type" jdbcType="TINYINT" property="stockPositionPutType"/>
+        <result column="aisle" jdbcType="VARCHAR" property="aisle"/>
+        <result column="scale" jdbcType="VARCHAR" property="scale"/>
+        <result column="level" jdbcType="VARCHAR" property="level"/>
+        <result column="pick_level" jdbcType="INTEGER" property="pickLevel"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_id" jdbcType="BIGINT" property="updateId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, stock_position_code, stock_position_name, max_capacity, stock_area_id, warehouse_id,
+        `length`, width, height, capacity, is_mixed, `status`, remark, stock_position_type,
+        stock_position_put_type, aisle, `scale`, `level`, pick_level, create_date, create_id,
+        update_date, update_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_position
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete
+        from t_stock_position
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.wms.base.service.model.entity.stock.StockPositionEntity" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_stock_position (stock_position_code, stock_position_name,
+                                      max_capacity, stock_area_id, warehouse_id,
+                                      `length`, width, height,
+                                      capacity, is_mixed, `status`,
+                                      remark, stock_position_type, stock_position_put_type,
+                                      aisle, `scale`, `level`,
+                                      pick_level, create_date, create_id,
+                                      update_date, update_id)
+        values (#{stockPositionCode,jdbcType=VARCHAR}, #{stockPositionName,jdbcType=VARCHAR},
+                #{maxCapacity,jdbcType=VARCHAR}, #{stockAreaId,jdbcType=BIGINT}, #{warehouseId,jdbcType=BIGINT},
+                #{length,jdbcType=DECIMAL}, #{width,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL},
+                #{capacity,jdbcType=DECIMAL}, #{isMixed,jdbcType=TINYINT}, #{status,jdbcType=TINYINT},
+                #{remark,jdbcType=VARCHAR}, #{stockPositionType,jdbcType=TINYINT},
+                #{stockPositionPutType,jdbcType=TINYINT},
+                #{aisle,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR},
+                #{pickLevel,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT},
+                #{updateDate,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.wms.base.service.model.entity.stock.StockPositionEntity" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_stock_position
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stockPositionCode != null">
+                stock_position_code,
+            </if>
+            <if test="stockPositionName != null">
+                stock_position_name,
+            </if>
+            <if test="maxCapacity != null">
+                max_capacity,
+            </if>
+            <if test="stockAreaId != null">
+                stock_area_id,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="length != null">
+                `length`,
+            </if>
+            <if test="width != null">
+                width,
+            </if>
+            <if test="height != null">
+                height,
+            </if>
+            <if test="capacity != null">
+                capacity,
+            </if>
+            <if test="isMixed != null">
+                is_mixed,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="stockPositionType != null">
+                stock_position_type,
+            </if>
+            <if test="stockPositionPutType != null">
+                stock_position_put_type,
+            </if>
+            <if test="aisle != null">
+                aisle,
+            </if>
+            <if test="scale != null">
+                `scale`,
+            </if>
+            <if test="level != null">
+                `level`,
+            </if>
+            <if test="pickLevel != null">
+                pick_level,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateId != null">
+                update_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stockPositionCode != null">
+                #{stockPositionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="stockPositionName != null">
+                #{stockPositionName,jdbcType=VARCHAR},
+            </if>
+            <if test="maxCapacity != null">
+                #{maxCapacity,jdbcType=VARCHAR},
+            </if>
+            <if test="stockAreaId != null">
+                #{stockAreaId,jdbcType=BIGINT},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=BIGINT},
+            </if>
+            <if test="length != null">
+                #{length,jdbcType=DECIMAL},
+            </if>
+            <if test="width != null">
+                #{width,jdbcType=DECIMAL},
+            </if>
+            <if test="height != null">
+                #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="capacity != null">
+                #{capacity,jdbcType=DECIMAL},
+            </if>
+            <if test="isMixed != null">
+                #{isMixed,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="stockPositionType != null">
+                #{stockPositionType,jdbcType=TINYINT},
+            </if>
+            <if test="stockPositionPutType != null">
+                #{stockPositionPutType,jdbcType=TINYINT},
+            </if>
+            <if test="aisle != null">
+                #{aisle,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                #{scale,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="pickLevel != null">
+                #{pickLevel,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                #{updateId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.wms.base.service.model.entity.stock.StockPositionEntity">
+        <!--@mbg.generated-->
+        update t_stock_position
+        <set>
+            <if test="stockPositionCode != null">
+                stock_position_code = #{stockPositionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="stockPositionName != null">
+                stock_position_name = #{stockPositionName,jdbcType=VARCHAR},
+            </if>
+            <if test="maxCapacity != null">
+                max_capacity = #{maxCapacity,jdbcType=VARCHAR},
+            </if>
+            <if test="stockAreaId != null">
+                stock_area_id = #{stockAreaId,jdbcType=BIGINT},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=BIGINT},
+            </if>
+            <if test="length != null">
+                `length` = #{length,jdbcType=DECIMAL},
+            </if>
+            <if test="width != null">
+                width = #{width,jdbcType=DECIMAL},
+            </if>
+            <if test="height != null">
+                height = #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="capacity != null">
+                capacity = #{capacity,jdbcType=DECIMAL},
+            </if>
+            <if test="isMixed != null">
+                is_mixed = #{isMixed,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="stockPositionType != null">
+                stock_position_type = #{stockPositionType,jdbcType=TINYINT},
+            </if>
+            <if test="stockPositionPutType != null">
+                stock_position_put_type = #{stockPositionPutType,jdbcType=TINYINT},
+            </if>
+            <if test="aisle != null">
+                aisle = #{aisle,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                `scale` = #{scale,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                `level` = #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="pickLevel != null">
+                pick_level = #{pickLevel,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                update_id = #{updateId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wms.base.service.model.entity.stock.StockPositionEntity">
+        <!--@mbg.generated-->
+        update t_stock_position
+        set stock_position_code     = #{stockPositionCode,jdbcType=VARCHAR},
+            stock_position_name     = #{stockPositionName,jdbcType=VARCHAR},
+            max_capacity            = #{maxCapacity,jdbcType=VARCHAR},
+            stock_area_id           = #{stockAreaId,jdbcType=BIGINT},
+            warehouse_id            = #{warehouseId,jdbcType=BIGINT},
+            `length`                = #{length,jdbcType=DECIMAL},
+            width                   = #{width,jdbcType=DECIMAL},
+            height                  = #{height,jdbcType=DECIMAL},
+            capacity                = #{capacity,jdbcType=DECIMAL},
+            is_mixed                = #{isMixed,jdbcType=TINYINT},
+            `status`                = #{status,jdbcType=TINYINT},
+            remark                  = #{remark,jdbcType=VARCHAR},
+            stock_position_type     = #{stockPositionType,jdbcType=TINYINT},
+            stock_position_put_type = #{stockPositionPutType,jdbcType=TINYINT},
+            aisle                   = #{aisle,jdbcType=VARCHAR},
+            `scale`                 = #{scale,jdbcType=VARCHAR},
+            `level`                 = #{level,jdbcType=VARCHAR},
+            pick_level              = #{pickLevel,jdbcType=INTEGER},
+            create_date             = #{createDate,jdbcType=TIMESTAMP},
+            create_id               = #{createId,jdbcType=BIGINT},
+            update_date             = #{updateDate,jdbcType=TIMESTAMP},
+            update_id               = #{updateId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_stock_position
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="stock_position_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionCode,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="stock_position_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionName,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="max_capacity = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.maxCapacity,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="stock_area_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.stockAreaId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="`length` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.length,jdbcType=DECIMAL}
+                </foreach>
+            </trim>
+            <trim prefix="width = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.width,jdbcType=DECIMAL}
+                </foreach>
+            </trim>
+            <trim prefix="height = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.height,jdbcType=DECIMAL}
+                </foreach>
+            </trim>
+            <trim prefix="capacity = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.capacity,jdbcType=DECIMAL}
+                </foreach>
+            </trim>
+            <trim prefix="is_mixed = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.isMixed,jdbcType=TINYINT}
+                </foreach>
+            </trim>
+            <trim prefix="`status` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.status,jdbcType=TINYINT}
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="stock_position_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionType,jdbcType=TINYINT}
+                </foreach>
+            </trim>
+            <trim prefix="stock_position_put_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionPutType,jdbcType=TINYINT}
+                </foreach>
+            </trim>
+            <trim prefix="aisle = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.aisle,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`scale` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.scale,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`level` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.level,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="pick_level = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.pickLevel,jdbcType=INTEGER}
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="create_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="update_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="update_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_stock_position
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="stock_position_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.stockPositionCode != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionCode,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="stock_position_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.stockPositionName != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="max_capacity = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.maxCapacity != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.maxCapacity,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="stock_area_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.stockAreaId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.stockAreaId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.warehouseId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`length` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.length != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.length,jdbcType=DECIMAL}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="width = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.width != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.width,jdbcType=DECIMAL}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="height = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.height != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.height,jdbcType=DECIMAL}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="capacity = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.capacity != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.capacity,jdbcType=DECIMAL}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="is_mixed = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.isMixed != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.isMixed,jdbcType=TINYINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`status` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.status != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.status,jdbcType=TINYINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.remark != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="stock_position_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.stockPositionType != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionType,jdbcType=TINYINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="stock_position_put_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.stockPositionPutType != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.stockPositionPutType,jdbcType=TINYINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="aisle = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.aisle != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.aisle,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`scale` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.scale != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.scale,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`level` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.level != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.level,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="pick_level = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.pickLevel != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.pickLevel,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createDate != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateDate != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_stock_position
+        (stock_position_code, stock_position_name, max_capacity, stock_area_id, warehouse_id,
+         `length`, width, height, capacity, is_mixed, `status`, remark, stock_position_type,
+         stock_position_put_type, aisle, `scale`, `level`, pick_level, create_date, create_id,
+         update_date, update_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.stockPositionCode,jdbcType=VARCHAR}, #{item.stockPositionName,jdbcType=VARCHAR},
+             #{item.maxCapacity,jdbcType=VARCHAR}, #{item.stockAreaId,jdbcType=BIGINT},
+             #{item.warehouseId,jdbcType=BIGINT},
+             #{item.length,jdbcType=DECIMAL}, #{item.width,jdbcType=DECIMAL}, #{item.height,jdbcType=DECIMAL},
+             #{item.capacity,jdbcType=DECIMAL}, #{item.isMixed,jdbcType=TINYINT}, #{item.status,jdbcType=TINYINT},
+             #{item.remark,jdbcType=VARCHAR}, #{item.stockPositionType,jdbcType=TINYINT},
+             #{item.stockPositionPutType,jdbcType=TINYINT},
+             #{item.aisle,jdbcType=VARCHAR}, #{item.scale,jdbcType=VARCHAR}, #{item.level,jdbcType=VARCHAR},
+             #{item.pickLevel,jdbcType=INTEGER}, #{item.createDate,jdbcType=TIMESTAMP},
+             #{item.createId,jdbcType=BIGINT},
+             #{item.updateDate,jdbcType=TIMESTAMP}, #{item.updateId,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+
+    <select id="getStockPositionList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_position
+        where warehouse_id = #{warehouseId}
+        <if test="param.stockAreaIds != null and param.stockAreaIds.size() != 0">
+            and stock_area_id in
+            <foreach collection="param.stockAreaIds" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="param.stockPositionCode != null and param.stockPositionCode != ''">
+            and stock_position_code like concat(#{param.stockPositionCode}, '%')
+        </if>
+        <if test="param.stockPositionName != null and param.stockPositionName != ''">
+            and stock_position_name like concat(#{param.stockPositionName}, '%')
+        </if>
+        <if test="param.isMixed != null">
+            and is_mixed = #{param.isMixed}
+        </if>
+        <if test="param.status != null">
+            and status = #{param.status}
+        </if>
+        <if test="param.stockPositionType != null">
+            and stock_position_type = #{param.stockPositionType}
+        </if>
+        limit #{param.offset},#{param.pageSize}
+    </select>
+
+    <select id="getStockPositionListCount" resultType="java.lang.Long">
+        select count(*)
+        from t_stock_position
+        where warehouse_id = #{warehouseId}
+        <if test="param.stockAreaIds != null and param.stockAreaIds.size() != 0">
+            and stock_area_id in
+            <foreach collection="param.stockAreaIds" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="param.stockPositionCode != null and param.stockPositionCode != ''">
+            and stock_position_code like concat(#{param.stockPositionCode}, '%')
+        </if>
+        <if test="param.stockPositionName != null and param.stockPositionName != ''">
+            and stock_position_name like concat(#{param.stockPositionName}, '%')
+        </if>
+        <if test="param.isMixed != null">
+            and is_mixed = #{param.isMixed}
+        </if>
+        <if test="param.status != null">
+            and status = #{param.status}
+        </if>
+        <if test="param.stockPositionType != null">
+            and stock_position_type = #{param.stockPositionType}
+        </if>
+    </select>
+</mapper>
