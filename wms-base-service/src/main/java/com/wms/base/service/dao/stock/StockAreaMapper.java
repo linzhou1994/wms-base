@@ -1,7 +1,10 @@
 package com.wms.base.service.dao.stock;
 
 import com.wms.base.service.model.entity.stock.StockAreaEntity;
+
 import java.util.List;
+
+import com.wms.base.service.model.param.stock.GetStockAreaListParam;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -59,4 +62,10 @@ public interface StockAreaMapper {
     int updateBatchSelective(List<StockAreaEntity> list);
 
     int batchInsert(@Param("list") List<StockAreaEntity> list);
+
+    List<StockAreaEntity> getStockAreaList(@Param("param") GetStockAreaListParam param, @Param("warehouseId") Long warehouseId);
+
+    Long getStockAreaListCount(@Param("param") GetStockAreaListParam param, @Param("warehouseId") Long warehouseId);
+
+    List<StockAreaEntity> selectByIds(@Param("ids") List<Long> ids);
 }

@@ -79,7 +79,7 @@ public class CompanyServiceImpl implements CompanyService {
         AssertUtil.isTrue(bandCompanyId.contains(companyId), WmsBaseErrorCodeEnum.USER_IS_NOT_COMPANY_STAFF);
         CompanyEntity company = getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
-        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
+        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ENABLE.getCode()
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
         refreshChooseCompany(companyId, ticket);
     }
@@ -96,7 +96,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         CompanyEntity company = getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
-        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
+        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ENABLE.getCode()
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
         refreshChooseCompany(companyId, ticket);
 
@@ -125,7 +125,7 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyEntity companyEntity = BeanCopy.copy(createCompanyParam, CompanyEntity.class);
         String companyType = createCompanyParam.getCompanyType().stream().map(String::valueOf).collect(Collectors.joining(","));
         companyEntity.setCompanyType(companyType);
-        companyEntity.setCompanyStatus(CompanyStatusEnum.ALLOW_LOGIN.getCode());
+        companyEntity.setCompanyStatus(CompanyStatusEnum.ENABLE.getCode());
 
         Long userId = LoginUtil.getUserId();
         companyEntity.setCreateId(userId);

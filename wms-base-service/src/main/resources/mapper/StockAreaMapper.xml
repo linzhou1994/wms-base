@@ -1,320 +1,360 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wms.base.service.dao.stock.StockAreaMapper">
-  <resultMap id="BaseResultMap" type="com.wms.base.service.model.entity.stock.StockAreaEntity">
-    <!--@mbg.generated-->
-    <!--@Table t_stock_area-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
-    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
-    <result column="area_type" jdbcType="VARCHAR" property="areaType" />
-    <result column="warehouse_id" jdbcType="BIGINT" property="warehouseId" />
-    <result column="area_status" jdbcType="VARCHAR" property="areaStatus" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="create_id" jdbcType="BIGINT" property="createId" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="update_id" jdbcType="BIGINT" property="updateId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, area_code, area_name, area_type, warehouse_id, area_status, remark, create_date, 
-    create_id, update_date, update_id
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from t_stock_area
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from t_stock_area
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_stock_area (area_code, area_name, area_type, 
-      warehouse_id, area_status, remark, 
-      create_date, create_id, update_date, 
-      update_id)
-    values (#{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, #{areaType,jdbcType=VARCHAR}, 
-      #{warehouseId,jdbcType=BIGINT}, #{areaStatus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{updateId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_stock_area
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="areaCode != null">
-        area_code,
-      </if>
-      <if test="areaName != null">
-        area_name,
-      </if>
-      <if test="areaType != null">
-        area_type,
-      </if>
-      <if test="warehouseId != null">
-        warehouse_id,
-      </if>
-      <if test="areaStatus != null">
-        area_status,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="createId != null">
-        create_id,
-      </if>
-      <if test="updateDate != null">
-        update_date,
-      </if>
-      <if test="updateId != null">
-        update_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="areaCode != null">
-        #{areaCode,jdbcType=VARCHAR},
-      </if>
-      <if test="areaName != null">
-        #{areaName,jdbcType=VARCHAR},
-      </if>
-      <if test="areaType != null">
-        #{areaType,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouseId != null">
-        #{warehouseId,jdbcType=BIGINT},
-      </if>
-      <if test="areaStatus != null">
-        #{areaStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        #{createId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        #{updateId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity">
-    <!--@mbg.generated-->
-    update t_stock_area
-    <set>
-      <if test="areaCode != null">
-        area_code = #{areaCode,jdbcType=VARCHAR},
-      </if>
-      <if test="areaName != null">
-        area_name = #{areaName,jdbcType=VARCHAR},
-      </if>
-      <if test="areaType != null">
-        area_type = #{areaType,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouseId != null">
-        warehouse_id = #{warehouseId,jdbcType=BIGINT},
-      </if>
-      <if test="areaStatus != null">
-        area_status = #{areaStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        create_id = #{createId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        update_id = #{updateId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity">
-    <!--@mbg.generated-->
-    update t_stock_area
-    set area_code = #{areaCode,jdbcType=VARCHAR},
-      area_name = #{areaName,jdbcType=VARCHAR},
-      area_type = #{areaType,jdbcType=VARCHAR},
-      warehouse_id = #{warehouseId,jdbcType=BIGINT},
-      area_status = #{areaStatus,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_id = #{createId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_id = #{updateId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update t_stock_area
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="area_code = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.areaCode,jdbcType=VARCHAR}
+    <resultMap id="BaseResultMap" type="com.wms.base.service.model.entity.stock.StockAreaEntity">
+        <!--@mbg.generated-->
+        <!--@Table t_stock_area-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="area_code" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="area_type" jdbcType="VARCHAR" property="areaType"/>
+        <result column="warehouse_id" jdbcType="BIGINT" property="warehouseId"/>
+        <result column="area_status" jdbcType="VARCHAR" property="areaStatus"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_id" jdbcType="BIGINT" property="updateId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, area_code, area_name, area_type, warehouse_id, area_status, remark, create_date,
+        create_id, update_date, update_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_area
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete
+        from t_stock_area
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_stock_area (area_code, area_name, area_type,
+                                  warehouse_id, area_status, remark,
+                                  create_date, create_id, update_date,
+                                  update_id)
+        values (#{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, #{areaType,jdbcType=VARCHAR},
+                #{warehouseId,jdbcType=BIGINT}, #{areaStatus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+                #{createDate,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
+                #{updateId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_stock_area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="areaCode != null">
+                area_code,
+            </if>
+            <if test="areaName != null">
+                area_name,
+            </if>
+            <if test="areaType != null">
+                area_type,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="areaStatus != null">
+                area_status,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateId != null">
+                update_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null">
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaType != null">
+                #{areaType,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=BIGINT},
+            </if>
+            <if test="areaStatus != null">
+                #{areaStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                #{updateId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity">
+        <!--@mbg.generated-->
+        update t_stock_area
+        <set>
+            <if test="areaCode != null">
+                area_code = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null">
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaType != null">
+                area_type = #{areaType,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=BIGINT},
+            </if>
+            <if test="areaStatus != null">
+                area_status = #{areaStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                update_id = #{updateId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wms.base.service.model.entity.stock.StockAreaEntity">
+        <!--@mbg.generated-->
+        update t_stock_area
+        set area_code    = #{areaCode,jdbcType=VARCHAR},
+            area_name    = #{areaName,jdbcType=VARCHAR},
+            area_type    = #{areaType,jdbcType=VARCHAR},
+            warehouse_id = #{warehouseId,jdbcType=BIGINT},
+            area_status  = #{areaStatus,jdbcType=VARCHAR},
+            remark       = #{remark,jdbcType=VARCHAR},
+            create_date  = #{createDate,jdbcType=TIMESTAMP},
+            create_id    = #{createId,jdbcType=BIGINT},
+            update_date  = #{updateDate,jdbcType=TIMESTAMP},
+            update_id    = #{updateId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_stock_area
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="area_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.areaCode,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="area_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.areaName,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="area_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.areaType,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="area_status = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.areaStatus,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="create_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="update_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="update_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="area_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.areaName,jdbcType=VARCHAR}
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_stock_area
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="area_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.areaCode != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.areaCode,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="area_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.areaName != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.areaName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="area_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.areaType != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.areaType,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="warehouse_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.warehouseId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="area_status = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.areaStatus != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.areaStatus,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.remark != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createDate != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateDate != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="area_type = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.areaType,jdbcType=VARCHAR}
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_stock_area
+        (area_code, area_name, area_type, warehouse_id, area_status, remark, create_date,
+         create_id, update_date, update_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.areaCode,jdbcType=VARCHAR}, #{item.areaName,jdbcType=VARCHAR}, #{item.areaType,jdbcType=VARCHAR},
+             #{item.warehouseId,jdbcType=BIGINT}, #{item.areaStatus,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR},
+             #{item.createDate,jdbcType=TIMESTAMP}, #{item.createId,jdbcType=BIGINT},
+             #{item.updateDate,jdbcType=TIMESTAMP},
+             #{item.updateId,jdbcType=BIGINT})
         </foreach>
-      </trim>
-      <trim prefix="warehouse_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseId,jdbcType=BIGINT}
+    </insert>
+
+    <select id="getStockAreaList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_area
+        where warehouse_id = #{warehouseId}
+        <if test="param.areaCode != null and param.areaCode != ''">
+            and area_code = #{param.areaCode}
+        </if>
+        <if test="param.areaName != null and param.areaName != ''">
+            and area_name = #{param.areaName}
+        </if>
+        limit #{param.offset},#{param.pageSize}
+    </select>
+
+    <select id="getStockAreaListCount" resultType="java.lang.Long">
+        select count(*)
+        from t_stock_area
+        where warehouse_id = #{warehouseId}
+        <if test="param.areaCode != null and param.areaCode != ''">
+            and area_code = #{param.areaCode}
+        </if>
+        <if test="param.areaName != null and param.areaName != ''">
+            and area_name = #{param.areaName}
+        </if>
+    </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_area
+        where id in
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+            #{item}
         </foreach>
-      </trim>
-      <trim prefix="area_status = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.areaStatus,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="remark = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="create_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="create_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="update_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="update_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update t_stock_area
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="area_code = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.areaCode != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.areaCode,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="area_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.areaName != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.areaName,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="area_type = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.areaType != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.areaType,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="warehouse_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.warehouseId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.warehouseId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="area_status = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.areaStatus != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.areaStatus,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="remark = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.remark != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createDate != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.createDate,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.createId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_date = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateDate != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.updateDate,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.updateId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_stock_area
-    (area_code, area_name, area_type, warehouse_id, area_status, remark, create_date, 
-      create_id, update_date, update_id)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.areaCode,jdbcType=VARCHAR}, #{item.areaName,jdbcType=VARCHAR}, #{item.areaType,jdbcType=VARCHAR}, 
-        #{item.warehouseId,jdbcType=BIGINT}, #{item.areaStatus,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, 
-        #{item.createDate,jdbcType=TIMESTAMP}, #{item.createId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, 
-        #{item.updateId,jdbcType=BIGINT})
-    </foreach>
-  </insert>
+    </select>
 </mapper>

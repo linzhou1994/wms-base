@@ -1,15 +1,15 @@
 package com.wms.base.web.controller.warehouse;
 
 import com.java.utils.exception.BizException;
-import com.java.utils.result.Result;
 import com.spring.utils.bean.BeanCopy;
+import com.spring.utils.http.result.Result;
 import com.wms.base.service.model.dto.warehouse.GetWarehouseListDTO;
 import com.wms.base.service.model.param.warehouse.CreateWarehouseParam;
 import com.wms.base.service.service.warehouse.WarehouseService;
 import com.wms.base.web.request.IdRequest;
 import com.wms.base.web.request.warehouse.CreateWarehouseRequest;
-import com.wms.base.web.vo.warehouse.GetWarehouseListVo;
-import com.wms.base.web.vo.warehouse.WarehouseVo;
+import com.wms.base.web.vo.warehouse.GetWarehouseListVO;
+import com.wms.base.web.vo.warehouse.WarehouseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,12 +44,12 @@ public class WarehouseController {
      * @return
      */
     @RequestMapping("getWarehouseList")
-    public Result<List<GetWarehouseListVo>> getWarehouseList() throws BizException {
+    public Result<List<GetWarehouseListVO>> getWarehouseList() throws BizException {
         List<GetWarehouseListDTO> warehouseList = warehouseService.getWarehouseListDTO();
-        List<GetWarehouseListVo> data = new ArrayList<>();
+        List<GetWarehouseListVO> data = new ArrayList<>();
         for (GetWarehouseListDTO dto : warehouseList) {
-            GetWarehouseListVo copy = BeanCopy.copy(dto, GetWarehouseListVo.class);
-            copy.setWarehouseList(BeanCopy.copyList(dto.getWarehouseList(), WarehouseVo.class));
+            GetWarehouseListVO copy = BeanCopy.copy(dto, GetWarehouseListVO.class);
+            copy.setWarehouseList(BeanCopy.copyList(dto.getWarehouseList(), WarehouseVO.class));
             data.add(copy);
         }
 

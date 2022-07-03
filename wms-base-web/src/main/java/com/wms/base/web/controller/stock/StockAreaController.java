@@ -1,12 +1,17 @@
 package com.wms.base.web.controller.stock;
 
 import com.java.utils.exception.BizException;
-import com.java.utils.result.Result;
 import com.spring.utils.bean.BeanCopy;
+import com.spring.utils.http.result.PageResult;
+import com.spring.utils.http.result.Result;
 import com.wms.base.service.model.dto.stock.StockAreaDTO;
+import com.wms.base.service.model.entity.stock.StockAreaEntity;
+import com.wms.base.service.model.param.stock.GetStockAreaListParam;
 import com.wms.base.service.model.param.stock.SaveStockAreaParam;
 import com.wms.base.service.service.stock.StockAreaService;
+import com.wms.base.web.request.stock.GetStockAreaListRequest;
 import com.wms.base.web.request.stock.SaveStockAreaRequest;
+import com.wms.base.web.vo.stock.StockAreaVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,5 +51,21 @@ public class StockAreaController {
 
         StockAreaDTO stockAreaDTO = stockAreaService.saveStockAreas(param);
         return Result.success(stockAreaDTO);
+    }
+
+    /**
+     * 查询库区
+     *
+     * @return
+     */
+    @PostMapping("getStockAreaList")
+    public Result<PageResult<StockAreaVO>> getStockAreaList(@RequestBody GetStockAreaListRequest request) throws BizException {
+
+        GetStockAreaListParam param = BeanCopy.copy(request,GetStockAreaListParam.class);
+
+        PageResult<StockAreaEntity> pageResult = stockAreaService.getStockAreaList(param);
+
+        return Result.success(PageResult.build(pageResult,StockAreaVO.class));
+
     }
 }

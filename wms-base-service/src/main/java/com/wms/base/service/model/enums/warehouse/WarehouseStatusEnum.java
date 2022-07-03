@@ -12,7 +12,7 @@ package com.wms.base.service.model.enums.warehouse;
  * @since : 1.0 仓库账号状态类
  */
 public enum WarehouseStatusEnum {
-    ALLOW_LOGIN(0,"正常"),
+    ENABLE(0,"正常"),
     FREEZE(1,"冻结"),
     ;
     private Integer code;

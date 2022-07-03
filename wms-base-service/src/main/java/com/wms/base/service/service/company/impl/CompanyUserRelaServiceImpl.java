@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +46,7 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
         AssertUtil.isNotEmpty(userIds, WmsBaseErrorCodeEnum.COMPANY_USER_IDS_IS_NOT_NULL);
         CompanyEntity company = companyService.getCompanyById(companyId);
         AssertUtil.isNotNull(company, WmsBaseErrorCodeEnum.COMPANY_NOT_EXISTS);
-        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()
+        AssertUtil.isEquals(company.getCompanyStatus(), CompanyStatusEnum.ENABLE.getCode()
                 , WmsBaseErrorCodeEnum.COMPANY_IS_FREEZE);
 
         List<CompanyUserRelaEntity> oldRelaList =companyUserRelaMapper.selectByUserIdsAndCompanyId(userIds,companyId);
@@ -56,7 +55,7 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
                 .distinct()
                 .collect(Collectors.toList());
         if (CollectionUtils.isNotEmpty(oldRelaUserIds)){
-            companyUserRelaMapper.updateStatusByUserIdsAndCompanyId(userIds,companyId,RelaStatusEnum.ALLOW_LOGIN.getCode());
+            companyUserRelaMapper.updateStatusByUserIdsAndCompanyId(userIds,companyId,RelaStatusEnum.ENABLE.getCode());
         }
 
         Long loginUserId = LoginUtil.getUserId();
@@ -70,7 +69,7 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
             entity.setCompanyId(companyId);
             entity.setUserId(userId);
             entity.setCreateId(loginUserId);
-            entity.setStatus(RelaStatusEnum.ALLOW_LOGIN.getCode());
+            entity.setStatus(RelaStatusEnum.ENABLE.getCode());
             Date now = new Date();
             entity.setCreateDate(now);
             entity.setUpdateDate(now);
@@ -86,7 +85,7 @@ public class CompanyUserRelaServiceImpl implements CompanyUserRelaService {
     public List<Long> getBandCompanyId() throws BizException {
         Long userId = LoginUtil.getUserId();
 
-       List<CompanyUserRelaEntity> entities = companyUserRelaMapper.selectByUserId(userId,RelaStatusEnum.ALLOW_LOGIN.getCode());
+       List<CompanyUserRelaEntity> entities = companyUserRelaMapper.selectByUserId(userId,RelaStatusEnum.ENABLE.getCode());
 
 
         return entities.stream()

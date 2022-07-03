@@ -48,7 +48,7 @@ public class WarehouseUserRelaServiceImpl implements WarehouseUserRelaService {
         Long userId = LoginUtil.getUserId();
         return warehouseUserRelaMapper.selectByUserId(userId)
                 .stream()
-                .filter(o -> Objects.equals(o.getStatus(), RelaStatusEnum.ALLOW_LOGIN.getCode()))
+                .filter(o -> Objects.equals(o.getStatus(), RelaStatusEnum.ENABLE.getCode()))
                 .collect(Collectors.toList());
     }
 
@@ -57,14 +57,14 @@ public class WarehouseUserRelaServiceImpl implements WarehouseUserRelaService {
         AssertUtil.isNotEmpty(userIds, WmsBaseErrorCodeEnum.WAREHOUSE_USER_IDS_IS_NOT_NULL);
         WarehouseEntity warehouse = warehouseService.getWarehouseById(warehouseId);
         AssertUtil.isNotNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_NOT_EXISTS);
-        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ALLOW_LOGIN.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
+        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ENABLE.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
         //获取已经绑定过的员工，修改绑定状态
         List<WarehouseUserRelaEntity> oldRelaList = warehouseUserRelaMapper.selectByWarehouseIdAndUserIds(warehouseId, userIds);
         List<Long> oldUserIds = oldRelaList.stream()
                 .map(WarehouseUserRelaEntity::getUserId)
                 .collect(Collectors.toList());
         if (CollectionUtils.isNotEmpty(oldUserIds)) {
-            warehouseUserRelaMapper.updateStatusByWarehouseAndUserIds(warehouseId, oldUserIds, RelaStatusEnum.ALLOW_LOGIN.getCode());
+            warehouseUserRelaMapper.updateStatusByWarehouseAndUserIds(warehouseId, oldUserIds, RelaStatusEnum.ENABLE.getCode());
         }
         //没有绑定过的员工，创建绑定关系
         List<WarehouseUserRelaEntity> needBandList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class WarehouseUserRelaServiceImpl implements WarehouseUserRelaService {
             entity.setCompanyId(warehouse.getCompanyId());
             entity.setWarehouseId(warehouseId);
             entity.setUserId(userId);
-            entity.setStatus(RelaStatusEnum.ALLOW_LOGIN.getCode());
+            entity.setStatus(RelaStatusEnum.ENABLE.getCode());
             Date now = new Date();
             entity.setCreateDate(now);
             entity.setUpdateDate(now);

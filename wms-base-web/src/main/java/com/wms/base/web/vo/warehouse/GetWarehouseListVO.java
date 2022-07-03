@@ -16,7 +16,7 @@ import java.util.List;
  * @since : 1.0
  */
 @Data
-public class GetWarehouseListVo {
+public class GetWarehouseListVO {
     /**
      * 企业id
      */
@@ -28,5 +28,5 @@ public class GetWarehouseListVo {
     /**
      * 仓库列表
      */
-    private List<WarehouseVo> warehouseList;
+    private List<WarehouseVO> warehouseList;
 }

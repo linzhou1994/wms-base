@@ -45,7 +45,18 @@ public enum WmsBaseErrorCodeEnum implements ErrorCode {
     STOCK_AREA_NAME_NOT_BLANK("300002","库区名称不能为空"),
     STOCK_AREA_TYPE_NOT_BLANK("300003","库区类型不合法"),
     STOCK_AREA_NOT_EXISTS("300004","库区不存在"),
-    STOCK_AREA_NOT_IN_WAREHOUSE("300005","库区不在当前仓库"),
+    STOCK_AREA_NOT_IN_WAREHOUSE("300005","库区不存在"),
+    STOCK_AREA_ID_NOT_EXISTS("300006","库区ID：[]不存在"),
+
+    /********************31开头库位相关代码***********************/
+    ADD_STOCK_POSITION_LIST_NOT_EMPTY("310001","至少需要创建一个库位"),
+    ADD_STOCK_POSITION_NAME_NOT_EMPTY("310002","第[]个库位名字不能为空"),
+    ADD_STOCK_POSITION_CODE_NOT_EMPTY("310003","第[]个库位编码不能为空"),
+    ADD_STOCK_POSITION_AREA_NOT_EMPTY("310004","第[]个库位所属库区不能为空"),
+    STOCK_POSITION_NOT_EXISTS("310005","库位不存在"),
+    STOCK_POSITION_NOT_ENABLE("310006","库位为启用"),
+    STOCK_POSITION_NAME_NOT_EMPTY("310007","库位名字不能为空"),
+
 
     ;
     private String code;

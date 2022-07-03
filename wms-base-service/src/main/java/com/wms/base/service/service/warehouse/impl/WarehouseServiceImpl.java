@@ -78,12 +78,12 @@ public class WarehouseServiceImpl implements WarehouseService {
 
         List<CompanyEntity> companyEntities = companyService.getCompanyByIds(companyIds)
                 .stream()
-                .filter(o -> Objects.equals(o.getCompanyStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()))
+                .filter(o -> Objects.equals(o.getCompanyStatus(), CompanyStatusEnum.ENABLE.getCode()))
                 .collect(Collectors.toList());
 
         Map<Long, List<WarehouseEntity>> companyId2warehouse = getWarehouseByIds(warehouseIds)
                 .stream()
-                .filter(o -> Objects.equals(o.getWarehouseStatus(), CompanyStatusEnum.ALLOW_LOGIN.getCode()))
+                .filter(o -> Objects.equals(o.getWarehouseStatus(), CompanyStatusEnum.ENABLE.getCode()))
                 .collect(Collectors.groupingBy(WarehouseEntity::getCompanyId));
 
 
@@ -112,7 +112,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         AssertUtil.isTrue(warehouseIds.contains(warehouseId), WmsBaseErrorCodeEnum.USER_IS_NOT_WAREHOUSE_STAFF);
         WarehouseEntity warehouse = getWarehouseById(warehouseId);
         AssertUtil.isNotNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_NOT_EXISTS);
-        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ALLOW_LOGIN.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
+        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ENABLE.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
 
         refreshChooseWarehouse(warehouseId, ticket);
     }
@@ -127,7 +127,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         }
         WarehouseEntity warehouse = getWarehouseById(warehouseId);
         AssertUtil.isNotNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_NOT_EXISTS);
-        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ALLOW_LOGIN.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
+        AssertUtil.isEquals(warehouse.getWarehouseStatus(), WarehouseStatusEnum.ENABLE.getCode(), WmsBaseErrorCodeEnum.WAREHOUSE_IS_FREEZE);
         return BeanCopy.copy(warehouse, LoginWarehouseDTO.class);
     }
 
@@ -170,7 +170,7 @@ public class WarehouseServiceImpl implements WarehouseService {
      */
     private WarehouseEntity doCreateWarehouse(CreateWarehouseParam createWarehouseParam) throws BizException {
         WarehouseEntity entity = BeanCopy.copy(createWarehouseParam, WarehouseEntity.class);
-        entity.setWarehouseStatus(WarehouseStatusEnum.ALLOW_LOGIN.getCode());
+        entity.setWarehouseStatus(WarehouseStatusEnum.ENABLE.getCode());
         entity.setCreateId(LoginWarehouseUtils.getUserId());
         entity.setCompanyId(LoginWarehouseUtils.getLoginCompanyId());
         warehouseMapper.insertSelective(entity);

@@ -101,7 +101,7 @@ public class WarehouseCompanyRelaServiceImpl implements WarehouseCompanyRelaServ
             WarehouseCompanyRelaEntity entity = new WarehouseCompanyRelaEntity();
             entity.setCompanyId(companyId);
             entity.setWarehouseId(warehouseId);
-            entity.setStatus(RelaStatusEnum.ALLOW_LOGIN.getCode());
+            entity.setStatus(RelaStatusEnum.ENABLE.getCode());
             entity.setCreateId(loginUserId);
             entity.setCreateDate(now);
             entity.setUpdateDate(now);

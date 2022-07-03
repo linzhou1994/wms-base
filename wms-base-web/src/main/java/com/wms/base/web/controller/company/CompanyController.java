@@ -1,8 +1,8 @@
 package com.wms.base.web.controller.company;
 
 import com.java.utils.exception.BizException;
-import com.java.utils.result.Result;
 import com.spring.utils.bean.BeanCopy;
+import com.spring.utils.http.result.Result;
 import com.wms.base.service.model.entity.company.CompanyEntity;
 import com.wms.base.service.model.param.company.CreateCompanyParam;
 import com.wms.base.service.service.company.CompanyService;

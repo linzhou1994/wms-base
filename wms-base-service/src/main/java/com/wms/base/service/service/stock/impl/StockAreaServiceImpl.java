@@ -4,6 +4,7 @@ import com.java.utils.assertutil.AssertUtil;
 import com.java.utils.enums.EnumUtil;
 import com.java.utils.exception.BizException;
 import com.spring.utils.bean.BeanCopy;
+import com.spring.utils.http.result.PageResult;
 import com.wms.base.api.utils.LoginWarehouseUtils;
 import com.wms.base.service.dao.stock.StockAreaMapper;
 import com.wms.base.service.model.dto.stock.StockAreaDTO;
@@ -11,14 +12,19 @@ import com.wms.base.service.model.entity.stock.StockAreaEntity;
 import com.wms.base.service.model.enums.error.WmsBaseErrorCodeEnum;
 import com.wms.base.service.model.enums.stock.StockAreaStatusEnum;
 import com.wms.base.service.model.enums.stock.StockAreaTypeEnum;
+import com.wms.base.service.model.param.stock.GetStockAreaListParam;
 import com.wms.base.service.model.param.stock.SaveStockAreaParam;
 import com.wms.base.service.service.stock.StockAreaService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * CopyRight : <company domain>
@@ -53,6 +59,32 @@ public class StockAreaServiceImpl implements StockAreaService {
         }
         StockAreaEntity stockAreaEntity = stockAreaMapper.selectByPrimaryKey(stockAreaId);
         return BeanCopy.copy(stockAreaEntity, StockAreaDTO.class);
+    }
+
+    @Override
+    public PageResult<StockAreaEntity> getStockAreaList(GetStockAreaListParam param) throws BizException {
+        Long loginWarehouseId = LoginWarehouseUtils.getLoginWarehouseId();
+        Long total = stockAreaMapper.getStockAreaListCount(param,loginWarehouseId);
+        if (total <= 0L) {
+            return PageResult.buildEmpty(param);
+        }
+        List<StockAreaEntity> data = stockAreaMapper.getStockAreaList(param,loginWarehouseId);
+        return PageResult.build(param, total, data);
+    }
+
+    @Override
+    public List<StockAreaEntity> getByIds(List<Long> ids) {
+        if (CollectionUtils.isEmpty(ids)){
+            return Collections.emptyList();
+        }
+        ids = ids.stream()
+                .filter(id -> Objects.nonNull(id) && id > 0L)
+                .distinct()
+                .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(ids)){
+            return Collections.emptyList();
+        }
+        return stockAreaMapper.selectByIds(ids);
     }
 
     /**
@@ -92,7 +124,7 @@ public class StockAreaServiceImpl implements StockAreaService {
         checkStockAreaParam(saveStockAreaParam);
 
         StockAreaEntity stockAreaEntity = BeanCopy.copy(saveStockAreaParam, StockAreaEntity.class);
-        stockAreaEntity.setAreaStatus(StockAreaStatusEnum.ALLOW_LOGIN.getCode());
+        stockAreaEntity.setAreaStatus(StockAreaStatusEnum.ENABLE.getCode());
         stockAreaEntity.setWarehouseId(warehouseId);
         stockAreaEntity.setCreateId(LoginWarehouseUtils.getUserId());
         stockAreaMapper.insertSelective(stockAreaEntity);

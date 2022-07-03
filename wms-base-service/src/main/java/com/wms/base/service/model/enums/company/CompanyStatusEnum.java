@@ -12,7 +12,7 @@ package com.wms.base.service.model.enums.company;
  * @since : 1.0 企业账号状态类
  */
 public enum CompanyStatusEnum {
-    ALLOW_LOGIN(0,"正常"),
+    ENABLE(0,"正常"),
     FREEZE(1,"冻结"),
     ;
     private Integer code;

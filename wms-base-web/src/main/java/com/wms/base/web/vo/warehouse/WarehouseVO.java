@@ -14,7 +14,7 @@ import lombok.Data;
  * @since : 1.0
  */
 @Data
-public class WarehouseVo {
+public class WarehouseVO {
     /**
      * 仓库id
      */

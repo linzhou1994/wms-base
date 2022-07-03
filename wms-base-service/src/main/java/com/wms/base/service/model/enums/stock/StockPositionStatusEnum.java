@@ -37,7 +37,7 @@ package com.wms.base.service.model.enums.stock;
  * @author: linzhou
  * @description : StockAreaStatus
  */
-public enum StockAreaStatusEnum {
+public enum StockPositionStatusEnum {
     ENABLE("0","正常"),
     FREEZE("1","冻结"),
     DELETE("2","删除"),
@@ -45,7 +45,7 @@ public enum StockAreaStatusEnum {
     private String code;
     private String msg;
 
-    StockAreaStatusEnum(String code, String msg) {
+    StockPositionStatusEnum(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
