@@ -68,4 +68,6 @@ public interface StockPositionMapper {
     List<StockPositionEntity> getStockPositionList(@Param("param") GetStockPositionParam param, @Param("warehouseId") Long warehouseId);
 
     Long getStockPositionListCount(@Param("param") GetStockPositionParam param, @Param("warehouseId") Long warehouseId);
+
+    List<StockPositionEntity> selectByIds(@Param("ids") List<Long> ids);
 }

@@ -1,4 +1,4 @@
-package com.wms.base.api.dto.company;
+package com.wms.base.api.model.dto.company;
 
 import java.io.Serializable;
 import java.util.Date;

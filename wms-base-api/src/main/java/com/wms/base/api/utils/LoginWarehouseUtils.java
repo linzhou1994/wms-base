@@ -3,9 +3,9 @@ package com.wms.base.api.utils;
 import com.java.utils.assertutil.AssertUtil;
 import com.java.utils.exception.BizException;
 import com.wms.base.api.context.LoginWarehouseContext;
-import com.wms.base.api.dto.company.LoginCompanyDTO;
-import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
-import com.wms.base.api.enums.error.WmsBaseApiErrorCodeEnum;
+import com.wms.base.api.model.dto.company.LoginCompanyDTO;
+import com.wms.base.api.model.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.api.model.enums.error.WmsBaseApiErrorCodeEnum;
 import com.wms.singlesignonapi.utils.LoginUtil;
 
 /**

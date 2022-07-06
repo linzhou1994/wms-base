@@ -1,8 +1,8 @@
 package com.wms.base.api.interceptor.handler;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.wms.base.api.dto.company.LoginCompanyDTO;
-import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.api.model.dto.company.LoginCompanyDTO;
+import com.wms.base.api.model.dto.warehouse.LoginWarehouseDTO;
 import com.wms.base.api.remote.company.RemoteCompanyService;
 import com.wms.base.api.remote.warehouse.RemoteWarehouseService;
 import com.wms.base.api.utils.LoginWarehouseUtils;

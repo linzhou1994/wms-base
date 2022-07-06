@@ -1,7 +1,7 @@
 package com.wms.base.service.service.company;
 
 import com.java.utils.exception.BizException;
-import com.wms.base.api.dto.company.LoginCompanyDTO;
+import com.wms.base.api.model.dto.company.LoginCompanyDTO;
 import com.wms.base.service.model.param.company.CreateCompanyParam;
 import com.wms.base.service.model.entity.company.CompanyEntity;
 

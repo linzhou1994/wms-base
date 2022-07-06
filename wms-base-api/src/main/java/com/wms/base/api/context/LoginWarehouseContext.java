@@ -1,7 +1,7 @@
 package com.wms.base.api.context;
 
-import com.wms.base.api.dto.company.LoginCompanyDTO;
-import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.api.model.dto.company.LoginCompanyDTO;
+import com.wms.base.api.model.dto.warehouse.LoginWarehouseDTO;
 import lombok.Data;
 
 import java.io.Serializable;
