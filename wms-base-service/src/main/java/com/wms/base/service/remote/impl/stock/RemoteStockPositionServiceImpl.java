@@ -33,4 +33,16 @@ public class RemoteStockPositionServiceImpl implements RemoteStockPositionServic
         List<StockPositionEntity> positionEntities = stockPositionService.getByIds(ids);
         return BeanCopy.copyList(positionEntities, StockPositionDTO.class);
     }
+
+    @Override
+    public StockPositionDTO getStockPositionByCode(Long warehouseId, String stockPositionCode) {
+        StockPositionEntity entity = stockPositionService.getStockPositionByCode(warehouseId,stockPositionCode);
+        return BeanCopy.copy(entity, StockPositionDTO.class);
+    }
+
+    @Override
+    public List<StockPositionDTO> getStockPositionByCodes(Long warehouseId, List<String> stockPositionCodes) {
+        List<StockPositionEntity> positionEntities = stockPositionService.getStockPositionByCodes(warehouseId,stockPositionCodes);
+        return BeanCopy.copyList(positionEntities, StockPositionDTO.class);
+    }
 }

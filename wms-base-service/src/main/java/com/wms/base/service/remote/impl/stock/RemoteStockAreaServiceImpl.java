@@ -34,4 +34,16 @@ public class RemoteStockAreaServiceImpl implements RemoteStockAreaService {
         List<StockAreaEntity> areaEntityList = service.getByIds(ids);
         return BeanCopy.copyList(areaEntityList, StockAreaDTO.class);
     }
+
+    @Override
+    public StockAreaDTO getStockAreaByAreaCode(Long warehouseId, String areaCode) {
+        StockAreaEntity areaEntity = service.getStockAreaByAreaCode(warehouseId,areaCode);
+        return BeanCopy.copy(areaEntity, StockAreaDTO.class);
+    }
+
+    @Override
+    public List<StockAreaDTO> getStockAreaByAreaCodes(Long warehouseId, List<String> areaCodes) {
+        List<StockAreaEntity> areaEntityList = service.getStockAreaByAreaCodes(warehouseId,areaCodes);
+        return BeanCopy.copyList(areaEntityList, StockAreaDTO.class);
+    }
 }

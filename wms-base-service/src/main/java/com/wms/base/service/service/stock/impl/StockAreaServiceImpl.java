@@ -95,6 +95,16 @@ public class StockAreaServiceImpl implements StockAreaService {
         return stockAreaMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public StockAreaEntity getStockAreaByAreaCode(Long warehouseId, String areaCode) {
+        return stockAreaMapper.selectByAreaCode(warehouseId,areaCode);
+    }
+
+    @Override
+    public List<StockAreaEntity> getStockAreaByAreaCodes(Long warehouseId, List<String> areaCodes) {
+        return stockAreaMapper.selectByAreaCodes(warehouseId,areaCodes);
+    }
+
     /**
      * 修改库区
      *

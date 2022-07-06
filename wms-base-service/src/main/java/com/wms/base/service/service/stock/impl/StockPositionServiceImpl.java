@@ -106,6 +106,16 @@ public class StockPositionServiceImpl implements StockPositionService {
         return stockPositionMapper.selectByIds(ids);
     }
 
+    @Override
+    public StockPositionEntity getStockPositionByCode(Long warehouseId, String stockPositionCode) {
+        return stockPositionMapper.selectByCode(warehouseId,stockPositionCode);
+    }
+
+    @Override
+    public List<StockPositionEntity> getStockPositionByCodes(Long warehouseId, List<String> stockPositionCodes) {
+        return stockPositionMapper.selectByCodes(warehouseId,stockPositionCodes);
+    }
+
     private void checkAddStockPositionBatch(List<AddStockPositionBatchItemParam> params) throws BizException {
 
         AssertUtil.isNotEmpty(params, WmsBaseErrorCodeEnum.ADD_STOCK_POSITION_LIST_NOT_EMPTY);

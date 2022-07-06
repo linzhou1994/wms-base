@@ -52,4 +52,9 @@ public interface StockPositionService {
      * @return
      */
     List<StockPositionEntity> getByIds(List<Long> ids);
+
+    StockPositionEntity getStockPositionByCode(Long warehouseId, String stockPositionCode);
+
+    List<StockPositionEntity> getStockPositionByCodes(Long warehouseId, List<String> stockPositionCodes);
+
 }
