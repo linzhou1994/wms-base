@@ -188,7 +188,8 @@ public class WarehouseServiceImpl implements WarehouseService {
     private void checkCreateWarehouseParam(CreateWarehouseParam createWarehouseParam) throws BizException {
         AssertUtil.isNotBlank(createWarehouseParam.getWarehouseName(), WmsBaseErrorCodeEnum.WAREHOUSE_NAME_IS_NOT_BLANK);
         AssertUtil.isNotBlank(createWarehouseParam.getWarehouseCode(), WmsBaseErrorCodeEnum.WAREHOUSE_CODE_IS_NOT_BLANK);
-        WarehouseEntity warehouse = warehouseMapper.selectByWarehouseCode(createWarehouseParam.getWarehouseCode());
+        Long loginCompanyId = LoginWarehouseUtils.getLoginCompanyId();
+        WarehouseEntity warehouse = warehouseMapper.selectByCompanyAndWarehouseCode(loginCompanyId,createWarehouseParam.getWarehouseCode());
         AssertUtil.isNull(warehouse, WmsBaseErrorCodeEnum.WAREHOUSE_CODE_EXISTS);
     }
 

@@ -63,5 +63,5 @@ public interface WarehouseMapper {
 
     List<WarehouseEntity> selectByIds(@Param("warehouseIds") List<Long> warehouseIds);
 
-    WarehouseEntity selectByWarehouseCode(@Param("warehouseCode") String warehouseCode);
+    WarehouseEntity selectByCompanyAndWarehouseCode(@Param("companyId") Long companyId, @Param("warehouseCode") String warehouseCode);
 }

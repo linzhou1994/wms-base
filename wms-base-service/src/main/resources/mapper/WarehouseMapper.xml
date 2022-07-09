@@ -284,9 +284,9 @@
         </foreach>
     </select>
 
-    <select id="selectByWarehouseCode" resultMap="BaseResultMap">
+    <select id="selectByCompanyAndWarehouseCode" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
         from t_warehouse
-        where warehouse_code = #{warehouseCode}
+        where warehouse_code = #{warehouseCode} and company_id = #{companyId}
     </select>
 </mapper>
