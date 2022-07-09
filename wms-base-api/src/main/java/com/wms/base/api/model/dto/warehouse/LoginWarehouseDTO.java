@@ -1,4 +1,4 @@
-package com.wms.base.api.dto.warehouse;
+package com.wms.base.api.model.dto.warehouse;
 
 import java.io.Serializable;
 import java.util.Date;

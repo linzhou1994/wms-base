@@ -1,4 +1,4 @@
-package com.wms.base.api.enums.error;
+package com.wms.base.api.model.enums.error;
 
 import com.java.utils.enums.SystemEnum;
 import com.java.utils.exception.ErrorCode;

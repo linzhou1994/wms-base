@@ -68,4 +68,8 @@ public interface StockAreaMapper {
     Long getStockAreaListCount(@Param("param") GetStockAreaListParam param, @Param("warehouseId") Long warehouseId);
 
     List<StockAreaEntity> selectByIds(@Param("ids") List<Long> ids);
+
+    StockAreaEntity selectByAreaCode(@Param("warehouseId") Long warehouseId, @Param("areaCode") String areaCode);
+
+    List<StockAreaEntity> selectByAreaCodes(@Param("warehouseId") Long warehouseId, @Param("areaCodes") List<String> areaCodes);
 }

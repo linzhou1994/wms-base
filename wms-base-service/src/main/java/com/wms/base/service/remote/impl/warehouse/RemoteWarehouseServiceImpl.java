@@ -2,8 +2,7 @@ package com.wms.base.service.remote.impl.warehouse;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.java.utils.exception.BizException;
-import com.spring.dubbo.annotation.RpcService;
-import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.api.model.dto.warehouse.LoginWarehouseDTO;
 import com.wms.base.api.remote.warehouse.RemoteWarehouseService;
 import com.wms.base.service.service.warehouse.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.wms.base.api.remote.warehouse;
 
 
 import com.java.utils.exception.BizException;
-import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.api.model.dto.warehouse.LoginWarehouseDTO;
 
 /**
  * @author linzhou

@@ -40,4 +40,9 @@ public interface StockAreaService {
      * @return
      */
     List<StockAreaEntity> getByIds(List<Long> ids);
+    StockAreaEntity getById(Long id);
+
+    StockAreaEntity getStockAreaByAreaCode(Long warehouseId, String areaCode);
+
+    List<StockAreaEntity> getStockAreaByAreaCodes(Long warehouseId, List<String> areaCodes);
 }

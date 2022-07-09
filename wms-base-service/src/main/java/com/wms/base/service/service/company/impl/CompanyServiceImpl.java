@@ -4,7 +4,7 @@ import com.java.utils.assertutil.AssertUtil;
 import com.java.utils.exception.BizException;
 import com.spring.utils.bean.BeanCopy;
 import com.wms.base.service.dao.company.CompanyMapper;
-import com.wms.base.api.dto.company.LoginCompanyDTO;
+import com.wms.base.api.model.dto.company.LoginCompanyDTO;
 import com.wms.base.service.model.param.company.CreateCompanyParam;
 import com.wms.base.service.model.enums.company.CompanyStatusEnum;
 import com.wms.base.service.model.enums.error.WmsBaseErrorCodeEnum;

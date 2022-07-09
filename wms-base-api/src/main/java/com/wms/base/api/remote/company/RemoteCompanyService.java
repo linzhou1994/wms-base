@@ -1,7 +1,7 @@
 package com.wms.base.api.remote.company;
 
 import com.java.utils.exception.BizException;
-import com.wms.base.api.dto.company.LoginCompanyDTO;
+import com.wms.base.api.model.dto.company.LoginCompanyDTO;
 
 /**
  * @author linzhou

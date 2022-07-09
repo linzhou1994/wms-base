@@ -17,6 +17,7 @@ import com.wms.base.service.model.param.stock.UpdateStockPositionParam;
 import com.wms.base.service.service.stock.StockAreaService;
 import com.wms.base.service.service.stock.StockPositionService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,6 +91,30 @@ public class StockPositionServiceImpl implements StockPositionService {
         return stockPositionMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public List<StockPositionEntity> getByIds(List<Long> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+        ids = ids.stream()
+                .filter(id -> Objects.nonNull(id) && id > 0L)
+                .distinct()
+                .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+        return stockPositionMapper.selectByIds(ids);
+    }
+
+    @Override
+    public StockPositionEntity getStockPositionByCode(Long warehouseId, String stockPositionCode) {
+        return stockPositionMapper.selectByCode(warehouseId,stockPositionCode);
+    }
+
+    @Override
+    public List<StockPositionEntity> getStockPositionByCodes(Long warehouseId, List<String> stockPositionCodes) {
+        return stockPositionMapper.selectByCodes(warehouseId,stockPositionCodes);
+    }
 
     private void checkAddStockPositionBatch(List<AddStockPositionBatchItemParam> params) throws BizException {
 

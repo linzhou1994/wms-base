@@ -44,4 +44,17 @@ public interface StockPositionService {
      * @return
      */
     StockPositionEntity getById(Long id);
+
+    /**
+     * 通过库位id获取库位列表
+     *
+     * @param ids
+     * @return
+     */
+    List<StockPositionEntity> getByIds(List<Long> ids);
+
+    StockPositionEntity getStockPositionByCode(Long warehouseId, String stockPositionCode);
+
+    List<StockPositionEntity> getStockPositionByCodes(Long warehouseId, List<String> stockPositionCodes);
+
 }

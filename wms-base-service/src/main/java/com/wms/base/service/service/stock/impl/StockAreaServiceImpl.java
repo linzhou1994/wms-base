@@ -64,27 +64,45 @@ public class StockAreaServiceImpl implements StockAreaService {
     @Override
     public PageResult<StockAreaEntity> getStockAreaList(GetStockAreaListParam param) throws BizException {
         Long loginWarehouseId = LoginWarehouseUtils.getLoginWarehouseId();
-        Long total = stockAreaMapper.getStockAreaListCount(param,loginWarehouseId);
+        Long total = stockAreaMapper.getStockAreaListCount(param, loginWarehouseId);
         if (total <= 0L) {
             return PageResult.buildEmpty(param);
         }
-        List<StockAreaEntity> data = stockAreaMapper.getStockAreaList(param,loginWarehouseId);
+        List<StockAreaEntity> data = stockAreaMapper.getStockAreaList(param, loginWarehouseId);
         return PageResult.build(param, total, data);
     }
 
     @Override
     public List<StockAreaEntity> getByIds(List<Long> ids) {
-        if (CollectionUtils.isEmpty(ids)){
+        if (CollectionUtils.isEmpty(ids)) {
             return Collections.emptyList();
         }
         ids = ids.stream()
                 .filter(id -> Objects.nonNull(id) && id > 0L)
                 .distinct()
                 .collect(Collectors.toList());
-        if (CollectionUtils.isEmpty(ids)){
+        if (CollectionUtils.isEmpty(ids)) {
             return Collections.emptyList();
         }
         return stockAreaMapper.selectByIds(ids);
+    }
+
+    @Override
+    public StockAreaEntity getById(Long id) {
+        if (Objects.isNull(id) || id <= 0L) {
+            return null;
+        }
+        return stockAreaMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public StockAreaEntity getStockAreaByAreaCode(Long warehouseId, String areaCode) {
+        return stockAreaMapper.selectByAreaCode(warehouseId,areaCode);
+    }
+
+    @Override
+    public List<StockAreaEntity> getStockAreaByAreaCodes(Long warehouseId, List<String> areaCodes) {
+        return stockAreaMapper.selectByAreaCodes(warehouseId,areaCodes);
     }
 
     /**

@@ -673,4 +673,33 @@
             and stock_position_type = #{param.stockPositionType}
         </if>
     </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_position
+        where id in
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_position
+        where warehouse_id = #{warehouseId}
+          and stock_position_code = #{stockPositionCode}
+    </select>
+
+    <select id="selectByCodes" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_position
+        where warehouse_id = #{warehouseId}
+          and stock_position_code in
+        <foreach collection="stockPositionCodes" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

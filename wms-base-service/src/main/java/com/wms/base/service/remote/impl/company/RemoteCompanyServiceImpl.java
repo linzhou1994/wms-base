@@ -2,7 +2,7 @@ package com.wms.base.service.remote.impl.company;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.java.utils.exception.BizException;
-import com.wms.base.api.dto.company.LoginCompanyDTO;
+import com.wms.base.api.model.dto.company.LoginCompanyDTO;
 import com.wms.base.api.remote.company.RemoteCompanyService;
 import com.wms.base.service.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;

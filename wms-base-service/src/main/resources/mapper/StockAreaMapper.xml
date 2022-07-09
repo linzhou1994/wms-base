@@ -357,4 +357,23 @@
             #{item}
         </foreach>
     </select>
+
+    <select id="selectByAreaCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_area
+        where warehouse_id = #{warehouseId}
+        and area_code = #{areaCode}
+    </select>
+
+    <select id="selectByAreaCodes" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_stock_area
+        where warehouse_id = #{warehouseId}
+        and area_code in
+        <foreach collection="areaCodes" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

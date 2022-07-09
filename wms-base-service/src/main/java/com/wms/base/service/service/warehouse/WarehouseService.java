@@ -1,7 +1,7 @@
 package com.wms.base.service.service.warehouse;
 
 import com.java.utils.exception.BizException;
-import com.wms.base.api.dto.warehouse.LoginWarehouseDTO;
+import com.wms.base.api.model.dto.warehouse.LoginWarehouseDTO;
 import com.wms.base.service.model.dto.warehouse.GetWarehouseListDTO;
 import com.wms.base.service.model.entity.warehouse.WarehouseEntity;
 import com.wms.base.service.model.param.warehouse.CreateWarehouseParam;

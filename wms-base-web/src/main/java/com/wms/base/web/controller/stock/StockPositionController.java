@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * 库位管理
  * CopyRight : <company domain>
  * Project :  wms-base
  * Comments : <对此类的描述，可以引用系统设计中的描述>
