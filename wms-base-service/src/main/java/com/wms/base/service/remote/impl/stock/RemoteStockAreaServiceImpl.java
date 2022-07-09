@@ -1,15 +1,13 @@
 package com.wms.base.service.remote.impl.stock;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import com.spring.dubbo.annotation.RpcService;
 import com.spring.utils.bean.BeanCopy;
 import com.wms.base.api.model.dto.stock.StockAreaDTO;
 import com.wms.base.api.remote.stock.RemoteStockAreaService;
 import com.wms.base.service.model.entity.stock.StockAreaEntity;
 import com.wms.base.service.service.stock.StockAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,8 +15,7 @@ import java.util.List;
  * @author: linzhou
  * @description : RemoteStockAreaServiceImpl
  */
-@Service
-@Component
+@RpcService
 public class RemoteStockAreaServiceImpl implements RemoteStockAreaService {
     @Autowired
     private StockAreaService service;

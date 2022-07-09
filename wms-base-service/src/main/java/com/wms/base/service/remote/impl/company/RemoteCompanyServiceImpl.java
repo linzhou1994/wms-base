@@ -1,12 +1,11 @@
 package com.wms.base.service.remote.impl.company;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.java.utils.exception.BizException;
+import com.spring.dubbo.annotation.RpcService;
 import com.wms.base.api.model.dto.company.LoginCompanyDTO;
 import com.wms.base.api.remote.company.RemoteCompanyService;
 import com.wms.base.service.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * CopyRight : <company domain>
@@ -19,8 +18,7 @@ import org.springframework.stereotype.Component;
  * @version : 1.0
  * @since : 1.0
  */
-@Service
-@Component
+@RpcService
 public class RemoteCompanyServiceImpl implements RemoteCompanyService {
     @Autowired
     private CompanyService companyService;
