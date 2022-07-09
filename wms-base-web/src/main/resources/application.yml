@@ -31,7 +31,7 @@ spring:
     registry:
       ## dubbo注册中心地址 zookeeper地址
       address: zookeeper://www.linzhou.link:2181
-    scan: com.wms,
+    scan: com.wms
     provider:
       filter: dubboLogFilter
 
