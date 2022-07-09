@@ -8,6 +8,7 @@ import com.wms.base.api.remote.warehouse.RemoteWarehouseService;
 import com.wms.base.api.utils.LoginWarehouseUtils;
 import com.wms.singlesignonapi.annotation.NotLogin;
 import com.wms.singlesignonapi.interceptor.handler.LoginHandler;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -32,9 +33,9 @@ import java.util.Objects;
 @Order(10)
 public class CompanyWarehouseHandler implements LoginHandler {
 
-    @Reference
+    @DubboReference(check = false)
     private RemoteCompanyService remoteCompanyService;
-    @Reference
+    @DubboReference(check = false)
     private RemoteWarehouseService remoteWarehouseService;
 
     @Override

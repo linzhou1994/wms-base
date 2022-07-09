@@ -19,21 +19,25 @@ spring:
 
 
 ###dubbo 注册到注册中心的名称
-  dubbo:
-    application:
-      name: wms-base
-    ##采用协议方式和端口号
-    protocol:
-      ## 常用协议：dubbo,http,webService等
-      name: dubbo
-      ## 发布dubbo端口号为20880
-      port: 20882
-    registry:
-      ## dubbo注册中心地址 zookeeper地址
-      address: zookeeper://www.linzhou.link:2181
-    scan: com.wms
-    provider:
-      filter: dubboLogFilter
+dubbo:
+  application:
+    name: wms-base
+  ##采用协议方式和端口号
+  protocol:
+    ## 常用协议：dubbo,http,webService等
+    name: dubbo
+    ## 发布dubbo端口号为20880
+    port: 20882
+  registry:
+    ## dubbo注册中心地址 zookeeper地址
+    address: zookeeper://www.linzhou.link:2181
+  scan:
+    base-packages: com.wms
+  provider:
+    filter: dubboLogFilter
+  consumer:
+    timeout: 3000
+    retries: 1
 
 #dubbo:
 #  application:
