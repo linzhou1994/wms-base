@@ -10,7 +10,9 @@ import com.wms.base.service.model.entity.stock.StockAreaEntity;
 import com.wms.base.service.model.entity.stock.StockPositionEntity;
 import com.wms.base.service.model.enums.error.WmsBaseErrorCodeEnum;
 import com.wms.base.service.model.enums.stock.StockAreaStatusEnum;
+import com.wms.base.service.model.enums.stock.StockPositionMixedEnum;
 import com.wms.base.service.model.enums.stock.StockPositionStatusEnum;
+import com.wms.base.service.model.enums.stock.StockPositionTypeEnum;
 import com.wms.base.service.model.param.stock.AddStockPositionBatchItemParam;
 import com.wms.base.service.model.param.stock.GetStockPositionParam;
 import com.wms.base.service.model.param.stock.UpdateStockPositionParam;
@@ -56,6 +58,21 @@ public class StockPositionServiceImpl implements StockPositionService {
         List<StockPositionEntity> entities = BeanCopy.copyList(params, StockPositionEntity.class);
         for (StockPositionEntity entity : entities) {
             entity.setWarehouseId(loginWarehouseId);
+            if (Objects.isNull(entity.getIsMixed())){
+                entity.setIsMixed(StockPositionMixedEnum.UN_ALLOW.getCode());
+            }
+            if (Objects.isNull(entity.getStockPositionType())){
+                entity.setStockPositionType(StockPositionTypeEnum.ENABLE.getCode());
+            }
+            if (Objects.isNull(entity.getStatus())){
+                entity.setStatus(StockPositionStatusEnum.ENABLE.getCode());
+            }
+            if (Objects.isNull(entity.getStockPositionPutType())){
+                entity.setStockPositionPutType(0);
+            }
+            if (Objects.isNull(entity.getPickLevel())){
+                entity.setPickLevel(1);
+            }
             entity.setCreateId(userId);
             entity.setCreateDate(now);
             entity.setUpdateDate(now);
@@ -108,12 +125,12 @@ public class StockPositionServiceImpl implements StockPositionService {
 
     @Override
     public StockPositionEntity getStockPositionByCode(Long warehouseId, String stockPositionCode) {
-        return stockPositionMapper.selectByCode(warehouseId,stockPositionCode);
+        return stockPositionMapper.selectByCode(warehouseId, stockPositionCode);
     }
 
     @Override
     public List<StockPositionEntity> getStockPositionByCodes(Long warehouseId, List<String> stockPositionCodes) {
-        return stockPositionMapper.selectByCodes(warehouseId,stockPositionCodes);
+        return stockPositionMapper.selectByCodes(warehouseId, stockPositionCodes);
     }
 
     private void checkAddStockPositionBatch(List<AddStockPositionBatchItemParam> params) throws BizException {

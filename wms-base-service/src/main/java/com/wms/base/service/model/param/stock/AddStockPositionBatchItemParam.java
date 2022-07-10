@@ -40,11 +40,6 @@ public class AddStockPositionBatchItemParam {
     private Long stockAreaId;
 
     /**
-     * 仓库id
-     */
-    private Long warehouseId;
-
-    /**
      * 长
      */
     private BigDecimal length;

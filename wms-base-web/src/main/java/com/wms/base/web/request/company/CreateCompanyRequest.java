@@ -29,6 +29,7 @@ public class CreateCompanyRequest {
 
     /**
      * 多选英文都好隔开 企业类型 0：仓储公司 1：获取供应商
+     * @see com.wms.base.service.model.enums.company.CompanyTypeEnum
      */
     private List<Integer> companyType;
 }

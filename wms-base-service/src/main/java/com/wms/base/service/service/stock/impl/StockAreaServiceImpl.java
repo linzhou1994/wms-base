@@ -153,6 +153,6 @@ public class StockAreaServiceImpl implements StockAreaService {
         AssertUtil.isNotBlank(saveStockAreaParam.getAreaCode(), WmsBaseErrorCodeEnum.STOCK_AREA_CODE_NOT_BLANK);
         AssertUtil.isNotBlank(saveStockAreaParam.getAreaName(), WmsBaseErrorCodeEnum.STOCK_AREA_NAME_NOT_BLANK);
         StockAreaTypeEnum typeEnum = EnumUtil.getEnumByCode(StockAreaTypeEnum.class, saveStockAreaParam.getAreaType());
-        AssertUtil.isNull(typeEnum, WmsBaseErrorCodeEnum.STOCK_AREA_TYPE_NOT_BLANK);
+        AssertUtil.isNotNull(typeEnum, WmsBaseErrorCodeEnum.STOCK_AREA_TYPE_NOT_BLANK);
     }
 }

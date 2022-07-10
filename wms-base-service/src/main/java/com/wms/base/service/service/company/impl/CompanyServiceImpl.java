@@ -48,7 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
     private RedisTemplate<String, Long> redisTemplate;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public CompanyEntity createCompany(CreateCompanyParam createCompanyParam) throws BizException {
         //校验创建企业参数
         checkCreateCompany(createCompanyParam);

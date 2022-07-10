@@ -1,5 +1,6 @@
 package com.wms.base.web.request.stock;
 
+import com.spring.utils.http.request.PageRequest;
 import lombok.Data;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * @since : 1.0
  */
 @Data
-public class GetStockPositionRequest {
+public class GetStockPositionRequest extends PageRequest {
     /**
      * 库区id
      */
